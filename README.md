@@ -102,6 +102,11 @@
     - お気に入り検索
     - お気に入り削除
 
+
+### 画面遷移図
+URLは[こちら](https://www.figma.com/design/qiYauRcFg0Ew4gOpA4y6Ql/%E7%84%A1%E9%A1%8C?node-id=0-1&t=8vpV6ZzYi7Zx2LPL-1)
+
+
 ### 本リリースまでに作っていたいもの
 #### 全ユーザー
 - レスポンシブ対応
