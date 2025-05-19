@@ -71,6 +71,11 @@ gem "bootsnap", require: false
   # AWSとの通信用
     gem 'aws-sdk-s3'
 
+  # tailwindcss用
+  # 参考URL https://tailwindcss.com/docs/installation/framework-guides/ruby-on-rails
+    gem 'tailwindcss-ruby'
+    gem 'tailwindcss-rails'
+
 # -------- ここまで --------
 
 group :development, :test do
