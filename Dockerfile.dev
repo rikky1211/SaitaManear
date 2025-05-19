@@ -13,4 +13,9 @@ RUN apt-get update -qq && apt-get install -y build-essential libpq-dev nodejs ya
 RUN mkdir /myapp
 WORKDIR /myapp
 RUN gem install bundler
+
+# Gemfileだけ先にコピーしてbundle installを行うことでキャッシュ効率UP＆gemをインストールする
+COPY Gemfile Gemfile.lock ./
+RUN bundle install
+
 COPY . /myapp
