@@ -14,26 +14,29 @@ class SpotsController < ApplicationController
   def create
     puts ""
     puts "-------------------------------------------------------"
-    puts "ENVバケット: #{ENV['AWS_S3_BUCKET_NAME']}"
-    puts "Rails.env: #{Rails.env}"
-    puts "実際に使われるバケット: #{ENV['AWS_S3_BUCKET_NAME']}-#{Rails.env}"
+    puts "ENVバケット: #{Rails.application.credentials.dig(:aws, :bucket)}"
+    puts "実際に使われるバケット: #{Rails.application.credentials.dig(:aws, :bucket)}-#{Rails.env}"
     puts "-------------------------------------------------------"
     puts ""
 
     @spot = Spot.new(spot_params)
     @spot.user = current_user
-    # @spot.town = Town.find(spot_params[:town_id])
-      if @spot.save
-        redirect_to @spot, notice: "スポットが登録されました"
-      else
-        puts params
-        render :new
-      end
+
+    if @spot.save
+      redirect_to @spot, notice: "スポットを登録しました"
+    else
+      puts "DEBUG: spot errors = #{@spot.errors.full_messages}"
+      render :new
+    end
+
+    puts "-------------------------------------------------------"
+    puts ""
   end
 
   private
 
   def spot_params
-    params.require(:spot).permit(:name, :spot_image, :summary, :latitude, :longitude, :town_id)
+    # 市区町村プルダウン、実装見送りのため 「, :town_id」 削除
+    params.require(:spot)&.permit(:name, :spot_image, :summary, :latitude, :longitude)
   end
 end

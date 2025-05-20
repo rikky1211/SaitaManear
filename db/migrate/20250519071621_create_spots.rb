@@ -3,7 +3,6 @@ class CreateSpots < ActiveRecord::Migration[7.2]
     create_table :spots, id: false do |t|
       t.uuid :id, primary_key: true, default: -> { "gen_random_uuid()" }
       t.references :user, null: false, type: :uuid, foreign_key: true
-      t.references :town, null: false, foreign_key: true
       t.string :name, null: false
       t.string :spot_image
       t.string :address

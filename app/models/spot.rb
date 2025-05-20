@@ -7,6 +7,6 @@ class Spot < ApplicationRecord
   validates :longitude, presence: true, uniqueness: true
 
   belongs_to :user
-  belongs_to :town
+  # belongs_to :town
   has_one_attached :spot_image
 end

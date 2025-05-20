@@ -45,7 +45,6 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_20_054952) do
 
   create_table "spots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id", null: false
-    t.bigint "town_id", null: false
     t.string "name", null: false
     t.string "spot_image"
     t.string "address"
@@ -55,14 +54,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_20_054952) do
     t.float "longitude", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["town_id"], name: "index_spots_on_town_id"
     t.index ["user_id"], name: "index_spots_on_user_id"
-  end
-
-  create_table "towns", force: :cascade do |t|
-    t.string "short_address", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -81,6 +73,5 @@ ActiveRecord::Schema[7.2].define(version: 2025_05_20_054952) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "spots", "towns"
   add_foreign_key "spots", "users"
 end
