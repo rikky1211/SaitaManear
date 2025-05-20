@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.2.2", ">= 7.2.2.1"
+gem "rails", "~> 8.0.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use postgresql as the database for Active Record
@@ -41,7 +41,7 @@ gem "bootsnap", require: false
   gem "pry-byebug"
 
   # アプリケーションの文言を英語以外の別の1つの言語に翻訳する機能や、多言語サポート機能を簡単かつ拡張可能な方式で導入するためのフレームワークを提供します。
-  gem "rails-i18n", "~> 7.0", ">= 7.0.10"
+  gem "rails-i18n", "~> 8.0"
 
   # WardenをベースにしたRails向けの柔軟な認証ソリューションです。
   gem "devise"
