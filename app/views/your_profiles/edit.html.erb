@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div>
+      <%= form_with model: @user, url: your_profile_path method: :put do |f| %>
+        <%= f.lavel :avatar %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+    <%= @user.avatar %>
+    <%= @user.name %>
+    <%= @user.email %>

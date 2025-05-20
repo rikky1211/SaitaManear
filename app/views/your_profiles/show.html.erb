@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="row">
+    <button>output</button>
+    <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-active btn-neutral" %>
+
+    <%= link_to "編集", edit_your_profile_path, class: "btn btn-secondary w-20" %>
+    <div class="flex flex-col">
+      <%= @user.name %>
+      <%= @user.email %>
+    </div>
+  </div>
+</div>
