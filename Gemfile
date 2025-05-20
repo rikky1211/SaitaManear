@@ -36,6 +36,48 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+# --------- 以下手動追加 --------
+  # デバッグGem
+  gem "pry-byebug"
+
+  # アプリケーションの文言を英語以外の別の1つの言語に翻訳する機能や、多言語サポート機能を簡単かつ拡張可能な方式で導入するためのフレームワークを提供します。
+  gem "rails-i18n", "~> 7.0", ">= 7.0.10"
+
+  # WardenをベースにしたRails向けの柔軟な認証ソリューションです。
+  gem "devise"
+
+  # Deviseはコントローラー、モデル、その他の領域でi18nをサポートしていますが、
+  # 国際化されたビューはサポートしていません。devise-i18nは国際化をサポートします。
+  # また、Deviseには実際の翻訳は含まれていません。devise-i18nはこれもサポートします。
+  gem "devise-i18n"
+
+  # rubocop Ruby_Lintcheck
+  gem "rubocop"
+
+  # GoogleMap APIキー保存/環境変数を管理することができるgemです。(.envファイルで使用)
+  gem "dotenv-rails"
+
+  # GoogleMap/住所や地名から座標（経度緯度）を取得したり、その逆を行ったりするgem
+  gem "geocoder"
+
+  # ActiveStorage用
+    # 1.vips --versionで「libvips」が入ってるか確認。
+    #   → brew install vips でインストール
+    #   ※画像サイズ加工しない場合はいらないみたい。
+  
+    # 2.image_processingをインストール
+    gem "image_processing", ">= 1.2"
+
+  # AWSとの通信用
+    gem 'aws-sdk-s3'
+
+  # tailwindcss用
+  # 参考URL https://tailwindcss.com/docs/installation/framework-guides/ruby-on-rails
+    gem 'tailwindcss-ruby'
+    gem 'tailwindcss-rails'
+
+# -------- ここまで --------
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"

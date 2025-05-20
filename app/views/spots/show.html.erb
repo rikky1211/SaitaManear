@@ -1,0 +1,68 @@
+<!-- app/views/spots/show.html.erb -->
+
+<style>
+  #map {
+    height: 50vh;
+  }
+</style>
+
+<div class="container mx-auto">
+  <div class="spot-detail">
+    <%= link_to '＜ 探索に戻る', spots_path, class: 'back-link' %>
+
+    <div class="spot-card">
+      <h2 class="spot-title"><%= @spot.name %></h2>
+
+      <div class="spot-image">
+        <% if @spot.spot_image.present? %>
+          ＜画像＞
+          <%#= image_tag @spot.spot_image, alt: @spot.name, class: "spot-img" %>
+        <% else %>
+          <div class="placeholder-img">画像未添付</div>
+        <% end %>
+      </div>
+
+      <table class="spot-info">
+        <tr>
+          <th>タグ：</th>
+          <td>
+            <div class="tag">3月、4月</div>
+          </td>
+        </tr>
+        <tr>
+          <th>概要</th>
+          <td><%= @spot.summary %></td>
+        </tr>
+      </table>
+
+      <div class="map-container" id="map"></div>
+
+      <div class="nearby-title">近くのスポット(Coming Soon)</div>
+      <div class="nearby-spots">
+        <div class="spot">近くのスポットA</div>
+        <div class="spot">近くのスポットB</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Google Maps JS読み込み -->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=ShowMacker">
+</script>
+
+<script>
+  function ShowMacker() {
+    const latLng = { lat: <%= @spot.latitude %>, lng: <%= @spot.longitude %> };
+    const map = new google.maps.Map(document.getElementById("map"), {
+      zoom: 16,
+      center: latLng,
+    });
+
+    new google.maps.Marker({
+      position: latLng,
+      map: map,
+      title: "<%= j @spot.name %>"
+    });
+  }
+</script>
