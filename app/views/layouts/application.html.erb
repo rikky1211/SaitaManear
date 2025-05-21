@@ -18,19 +18,24 @@
   </head>
 
   <body>
-    <% if signed_in? %>
-      <%= render 'shared/header' %>
-      <div class="pt-20 pb-20">
-        <%= yield %>
-      </div>
-      <%= render 'shared/footer' %>
+    <div class="fixed top-0 left-0 right-0" >
+      <% if signed_in? %>
+        <%= render 'shared/header' %>
+      <% else %>
+        <%= render 'shared/before_login_header' %>
+      <% end %>
+    </div>
 
-    <% else %>
-      <%= render 'shared/before_login_header' %>
-      <div class="pt-20 pb-20">
-        <%= yield %>
-      </div>
-      <%= render 'shared/before_login_footer' %>
-    <% end %>
+    <div class="pt-24 pb-24">
+          <%= yield %>
+    </div>
+
+    <div class="fixed bottom-0 bg-green-200 flex w-full items-center text-xs py-2 border-t border-green-400">
+      <% if signed_in? %>
+        <%= render 'shared/footer' %>
+      <% else %>
+        <%= render 'shared/before_login_footer' %>
+      <% end %>
+    </div>
   </body>
 </html>
