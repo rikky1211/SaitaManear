@@ -7,19 +7,25 @@
 </style>
 
 <div class="container mx-auto">
-  <div class="spot-detail">
-    <%= link_to '＜ 探索に戻る', spots_path, class: 'back-link' %>
+  <div class="page-move flex flex-row justify-between pt-8 pb-8 mx-auto">
+    <%= link_to '＜ 探索に戻る', spots_path, class: 'back-link font-bold' %>
+    <% if @spot.user == current_user %>
+      <div class="flex justify-end">
+        <%= link_to 'マイスポット一覧へ ＞', your_spots_path, class: 'font-bold' %>
+      </div>
+    <% end %>
+  </div>
 
-    <div class="spot-card">
+  <div class="spot-detail">
+    <div class="spot-card bg-orange-200 rounded-lg border border-orange-700 p-4 space-y-6 max-w-5xl mx-auto">
       <h2 class="spot-title"><%= @spot.name %></h2>
 
       <div class="spot-image">
-        <% if @spot.spot_image.present? %>
-          ＜画像＞
-          <%#= image_tag @spot.spot_image, alt: @spot.name, class: "spot-img" %>
-        <% else %>
-          <div class="placeholder-img">画像未添付</div>
-        <% end %>
+          <% if @spot.spot_image.attached? %>
+            <%= image_tag url_for(@spot.spot_image), class: "w-full h-full object-cover" %>
+          <% else %>
+            <span class="text-gray-600 text-sm">画像</span>
+          <% end %>
       </div>
 
       <table class="spot-info">
