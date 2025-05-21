@@ -12,13 +12,6 @@ class SpotsController < ApplicationController
   end
 
   def create
-    puts ""
-    puts "-------------------------------------------------------"
-    puts "ENVバケット: #{Rails.application.credentials.dig(:aws, :bucket)}"
-    puts "実際に使われるバケット: #{Rails.application.credentials.dig(:aws, :bucket)}-#{Rails.env}"
-    puts "-------------------------------------------------------"
-    puts ""
-
     @spot = Spot.new(spot_params)
     @spot.user = current_user
 
@@ -28,9 +21,6 @@ class SpotsController < ApplicationController
       puts "DEBUG: spot errors = #{@spot.errors.full_messages}"
       render :new
     end
-
-    puts "-------------------------------------------------------"
-    puts ""
   end
 
   private
