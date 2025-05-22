@@ -6,12 +6,16 @@ class YourSpotsController < ApplicationController
   end
 
   def edit
-  end
-  
-  def update
+    @spot = current_user.spots.find(params[:id])
   end
 
   def delete
+  end
+
+private
+
+  def spot_params
+    params.require(:spot).permit(:name, :spot_image, :summary, :latitude, :longitude)
   end
 
 end
