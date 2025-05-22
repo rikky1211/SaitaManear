@@ -11,9 +11,17 @@
 </script>
 
 <script>
-  function NewMacker() {
-    let map, marker;
-    
+  // 名前空間を作成（他と衝突しないように）
+  window.MapArgument = window.MapArgument || {};
+
+  // 地図とマーカーをグローバルに保持
+  MapArgument.map = null;
+  MapArgument.marker = null;
+
+  // Google Maps API のコールバック関数
+  // ページが読み込まれたらこの関数が自動的に実行される
+  window.NewMacker = function() {
+
     const default_LatLng = { lat: 35.681236, lng: 139.767125 };
     const mapElement = document.getElementById('map');
 
@@ -63,8 +71,8 @@
   }
 
   function placeMarker(location) {
-    if (marker) marker.setMap(null);
-    marker = new google.maps.Marker({
+    if (MapArgument.marker) MapArgument.marker.setMap(null);
+    MapArgument.marker = new google.maps.Marker({
       position: location,
       map: map,
     });
