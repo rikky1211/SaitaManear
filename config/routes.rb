@@ -15,5 +15,4 @@ Rails.application.routes.draw do
   resources :spots, only: %i[index new create show update]
   resources :your_spots, only: %i[index show edit destroy]
   resource :your_profile, only: %i[show edit update destroy]
-
 end

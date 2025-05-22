@@ -33,10 +33,10 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-# gem "image_processing", "~> 1.2"
+  # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+  # gem "image_processing", "~> 1.2"
 
-# --------- 以下手動追加 --------
+  # --------- 以下手動追加 --------
   # デバッグGem
   gem "pry-byebug"
 
@@ -60,21 +60,21 @@ gem "bootsnap", require: false
   # GoogleMap/住所や地名から座標（経度緯度）を取得したり、その逆を行ったりするgem
   gem "geocoder"
 
-  # ActiveStorage用
+    # ActiveStorage用
     # 1.vips --versionで「libvips」が入ってるか確認。
     #   → brew install vips でインストール
     #   ※画像サイズ加工しない場合はいらないみたい。
-  
+
     # 2.image_processingをインストール
     gem "image_processing", ">= 1.2"
 
-  # AWSとの通信用
-    gem 'aws-sdk-s3'
+    # AWSとの通信用
+    gem "aws-sdk-s3"
 
-  # tailwindcss用
-  # 参考URL https://tailwindcss.com/docs/installation/framework-guides/ruby-on-rails
-    gem 'tailwindcss-ruby'
-    gem 'tailwindcss-rails'
+    # tailwindcss用
+    # 参考URL https://tailwindcss.com/docs/installation/framework-guides/ruby-on-rails
+    gem "tailwindcss-ruby"
+    gem "tailwindcss-rails"
 
 # -------- ここまで --------
 

@@ -9,7 +9,9 @@ class YourSpotsController < ApplicationController
     @spot = current_user.spots.find(params[:id])
   end
 
-  def delete
+  def destroy
+      @spot = current_user.spots.find(params[:id])
+      @spot.destroy
   end
 
 private
@@ -17,5 +19,4 @@ private
   def spot_params
     params.require(:spot).permit(:name, :spot_image, :summary, :latitude, :longitude)
   end
-
 end
