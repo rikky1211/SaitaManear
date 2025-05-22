@@ -16,10 +16,30 @@ class SpotsController < ApplicationController
     @spot.user = current_user
 
     if @spot.save
+    puts "-----------------------------------------"
+    puts "フラッシュメッセージ追加しよう"
+    puts "-----------------------------------------"
       redirect_to @spot, notice: "スポットを登録しました"
     else
-      puts "DEBUG: spot errors = #{@spot.errors.full_messages}"
+    puts "-----------------------------------------"
+    puts "フラッシュメッセージ追加しよう"
+    puts "-----------------------------------------"
       render :new
+    end
+  end
+
+  def update
+    puts "-----------------------------------------"
+    puts params
+    puts "-----------------------------------------"
+
+    @spot = current_user.spots.find_by(id: params[:id])
+
+    if @spot.update(spot_params)
+      redirect_to @spot, notice: "スポットを更新しました"
+    else
+      puts "もう一度入力してね"
+      render :edit
     end
   end
 

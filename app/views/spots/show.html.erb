@@ -18,11 +18,11 @@
 
   <div class="spot-detail">
     <div class="spot-card bg-orange-200 rounded-lg border border-orange-700 p-4 space-y-6 max-w-5xl mx-auto">
-      <h2 class="spot-title"><%= @spot.name %></h2>
+      <h2 class="spot-title font-bold text-3xl mx-3 pt-2"><%= @spot.name %></h2>
 
       <div class="spot-image">
           <% if @spot.spot_image.attached? %>
-            <%= image_tag url_for(@spot.spot_image), class: "w-full h-full object-cover" %>
+            <%= image_tag url_for(@spot.spot_image), class: "w-144 h-108 object-cover mx-auto" %>
           <% else %>
             <span class="text-gray-600 text-sm">画像</span>
           <% end %>
@@ -32,7 +32,7 @@
         <tr>
           <th>タグ：</th>
           <td>
-            <div class="tag">3月、4月</div>
+            <div class="tag">Coming Soon...</div>
           </td>
         </tr>
         <tr>
@@ -58,7 +58,7 @@
 </script>
 
 <script>
-  function ShowMacker() {
+  window.ShowMacker = function() {
     const latLng = { lat: <%= @spot.latitude %>, lng: <%= @spot.longitude %> };
     const map = new google.maps.Map(document.getElementById("map"), {
       zoom: 16,
