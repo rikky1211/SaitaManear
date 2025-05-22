@@ -1,79 +1,90 @@
-your_spots/edit
-
+<!-- 編集ページのレイアウト（フォームを表示） -->
 <div class="container mx-auto px-4">
   <div class="spot-card bg-orange-200 rounded-lg border border-orange-700 p-4 space-y-6 max-w-5xl mx-auto">
+    <!-- 部分テンプレート shared/spot_form を読み込み、@spot を渡してフォームを表示 -->
     <%= render 'shared/spot_form', spot: @spot %>
   </div>
 </div>
 
-<!-- Google Maps Script -->
+<!-- Google Maps API の読み込み -->
+<!-- EditMacker 関数を API 読み込み後に実行するように指定（callback=EditMacker） -->
+<!-- async defer で非同期に読み込み → ページ表示が速くなる -->
 <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=NewMacker">
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=EditMacker">
 </script>
 
 <script>
-  function NewMacker() {
-    let map, marker;
-    
-    const default_LatLng = { lat: 35.681236, lng: 139.767125 };
+  // 名前空間を作成（他と衝突しないように）
+  window.MapArgument = window.MapArgument || {};
+
+  // 地図とマーカーをグローバルに保持
+  MapArgument.map = null;
+  MapArgument.marker = null;
+
+  // Google Maps API のコールバック関数
+  // ページが読み込まれたらこの関数が自動的に実行される
+  window.EditMacker = function() {
+    // map と marker を後で使うために定義（letで再代入可能に）
+
+
     const mapElement = document.getElementById('map');
 
-    // デフォルトの位置を東京駅に設定(位置共有を拒否した場合)
-    map = new google.maps.Map(mapElement,{
-      center: default_LatLng,
-      zoom: 15,
+    const latLng = { lat: <%= @spot.latitude %>, lng: <%= @spot.longitude %> };
+
+    // Google Map を表示（地図の初期設定）
+    map = new google.maps.Map(mapElement, {
+      zoom: 16,         // 拡大レベル
+      center: latLng,   // 地図の中心位置
     });
 
-    // 現在地を取得 
-    navigator.geolocation.getCurrentPosition(function (position) {
-      const userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-
-      // mapを２回読み込んでしまっていたのでコード書き換え。
-      map.setCenter(userLatLng);
-      // map = new google.maps.Map(mapElement, {
-        // center: userLatLng,
-        // zoom: 15
-      // });
-
-      const geocoder = new google.maps.Geocoder();
-      const input = document.createElement("input");
-      input.placeholder = "住所検索";
-      input.type = "text";
-      input.className = "border p-2 rounded-md shadow mb-2 w-64";
-      map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-      input.addEventListener("change", () => {
-        geocodeAddress(geocoder, map, input.value);
-      });
-
-      map.addListener("click", (e) => {
-        placeMarker(e.latLng);
-      });
+    // 初期マーカーを表示（すでに登録されている位置）
+    marker = new google.maps.Marker({
+      position: latLng,
+      map: map,
+      title: "<%= j @spot.name %>"
     });
-  }
 
-  function geocodeAddress(geocoder, map, address) {
-    geocoder.geocode({ address: address }, (results, status) => {
-      if (status === "OK") {
-        map.setCenter(results[0].geometry.location);
-        placeMarker(results[0].geometry.location);
-      } else {
-        alert("住所の取得に失敗しました: " + status);
-      }
+    // 住所検索のためのGeocoderを作成
+    const geocoder = new google.maps.Geocoder();
+
+    // 入力ボックスを作成（マップ上に住所検索バーを設置）
+    const input = document.createElement("input");
+    input.placeholder = "住所検索";
+    input.type = "text";
+    input.className = "border p-2 rounded-md shadow mb-2 w-64"; // CSSスタイル
+
+    // 地図の左上にこの入力ボックスを追加
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+    // 入力ボックスで住所が入力されたとき、Geocode（住所→緯度経度に変換）を実行
+    input.addEventListener("change", () => {
+      geocodeAddress(geocoder, map, input.value);
+    });
+
+    // 地図をクリックしたときのイベント：クリック位置にマーカーを移動
+    map.addListener("click", (e) => {
+      placeMarker(e.latLng);
     });
   }
 
+  // マーカーを表示し、緯度・経度のフォームに値を反映する関数
   function placeMarker(location) {
-    if (marker) marker.setMap(null);
+    // すでにマーカーがある場合は削除
+    if (marker) {marker.setMap(null);}
+
+    // 新しい位置にマーカーを作成
     marker = new google.maps.Marker({
       position: location,
       map: map,
     });
+
+    // 緯度・経度をフォームの hiddenフィールドなどに代入（DBに保存できるように）
     document.getElementById("latitude").value = location.lat();
     document.getElementById("longitude").value = location.lng();
   }
 </script>
 
+<!-- 地図の高さを設定 -->
 <style>
   #map {
     height: 50vh;
