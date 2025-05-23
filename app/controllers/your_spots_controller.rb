@@ -1,5 +1,6 @@
 class YourSpotsController < ApplicationController
   def index
+    @spots = current_user.spots
   end
 
   def show
@@ -10,13 +11,16 @@ class YourSpotsController < ApplicationController
   end
 
   def destroy
-      @spot = current_user.spots.find(params[:id])
-      @spot.destroy
+      spot = current_user.spots.find(params[:id])
+      if spot.spot_image.attached?
+        spot.spot_image.purge
+      end
+      spot.destroy!
   end
 
 private
 
   def spot_params
-    params.require(:spot).permit(:name, :spot_image, :summary, :latitude, :longitude)
+    params.require(:spot)&.permit(:name, :spot_image, :summary, :latitude, :longitude)
   end
 end
