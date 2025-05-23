@@ -18,6 +18,7 @@ class YourSpotsController < ApplicationController
         spot.spot_image.purge
       end
       spot.destroy!
+      redirect_to your_spots_path
   end
 
 private
