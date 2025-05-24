@@ -1,5 +1,5 @@
 class YourProfilesController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: %i[show edit update]
 
   def show
     @user = current_user
@@ -12,15 +12,10 @@ class YourProfilesController < ApplicationController
   def update
     @user = User.find(current_user.id)
     if @user.update(your_profile_params)
-    puts "----------------------------------------------------"
-    puts "フラッシュメッセージを追加しよう"
-    puts "----------------------------------------------------"
       redirect_to your_profile_path, notice: "プロフィールを更新しました"
     else
-    puts "----------------------------------------------------"
-    puts "フラッシュメッセージを追加しよう"
-    puts "----------------------------------------------------"
-      render :edit
+      flash.now[:error] = "アカウント名変更に失敗しました"
+      render :edit, status: :unprocessable_entity
     end
   end
 
