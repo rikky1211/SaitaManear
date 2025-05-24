@@ -1,4 +1,6 @@
-  <div class="text-center mx-auto">
+  <div class="container text-center mx-auto mx-4">
+    <%= render 'shared/flash_message' %>
+
     <h1 class="text-6xl font-bold m-8">
       Welcome!!<br />
       SaitaManear<br />
@@ -23,19 +25,18 @@
     特に変わり映えのないけど見てみたら面白い階段や、身近にある人目に触れないな変な物などまで、有名な場所以外にも巡る場所を増やすためのサービス。<br />
     </h1>
 
+    <div class="flex justify-center flex-col pt-8">
+      <%= link_to '#', class: "inline-block bg-orange-200 border-b-1 border-t-2 border-orange-300 hover:bg-orange-300 font-semibold py-2 px-4" do %>
+      <span>利用規約</span>
+      <% end %>
+
+      <%= link_to '#', class: "inline-block bg-orange-200 border-b-1 border-t-1 border-orange-300 hover:bg-orange-300 font-semibold py-2 px-4" do %>
+      <span>プライバシーポリシー</span>
+      <% end %>
+
+      <%= link_to '#', class: "inline-block bg-orange-200 border-b-2 border-t-1 border-orange-300 hover:bg-orange-300 font-semibold py-2 px-4" do %>
+      <span>お問い合わせ</span>
+      <% end %>
+    </div>
   </div>
 
-  <div class="flex justify-center flex-col pt-8">
-    <%= link_to '#', class: "inline-block bg-orange-200 border-b-1 border-t-2 border-orange-300 hover:bg-orange-300 font-semibold py-2 px-4" do %>
-    <span>利用規約</span>
-    <% end %>
-
-    <%= link_to '#', class: "inline-block bg-orange-200 border-b-1 border-t-1 border-orange-300 hover:bg-orange-300 font-semibold py-2 px-4" do %>
-    <span>プライバシーポリシー</span>
-    <% end %>
-
-    <%= link_to '#', class: "inline-block bg-orange-200 border-b-2 border-t-1 border-orange-300 hover:bg-orange-300 font-semibold py-2 px-4" do %>
-    <span>お問い合わせ</span>
-    <% end %>
-    
-  </div>

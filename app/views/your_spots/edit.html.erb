@@ -1,5 +1,7 @@
 <!-- 編集ページのレイアウト（フォームを表示） -->
 <div class="container mx-auto px-4">
+    <%= render 'shared/flash_message'%>
+    
   <div class="spot-card bg-orange-200 rounded-lg border border-orange-700 p-4 space-y-6 max-w-5xl mx-auto">
     <!-- 部分テンプレート shared/spot_form を読み込み、@spot を渡してフォームを表示 -->
     <%= render 'shared/spot_form', spot: @spot %>

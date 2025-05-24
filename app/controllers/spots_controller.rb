@@ -1,5 +1,5 @@
 class SpotsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create update]
+  before_action :authenticate_user!, only: %i[new create]
 
   def index
     @spots = Spot.all
@@ -18,32 +18,14 @@ class SpotsController < ApplicationController
     @spot.user = current_user
 
     if @spot.save
-    puts "-----------------------------------------"
-    puts "フラッシュメッセージ追加しよう"
-    puts "-----------------------------------------"
-      redirect_to @spot, notice: "スポットを登録しました"
+      redirect_to @spot, notice: "スポットを新規登録しました"
     else
-    puts "-----------------------------------------"
-    puts "フラッシュメッセージ追加しよう"
-    puts "-----------------------------------------"
-      render :new
+      flash.now[:error] = "新規スポット登録に失敗しました"
+      render :new, status: :unprocessable_entity
     end
   end
 
-  def update
-    puts "-----------------------------------------"
-    puts params
-    puts "-----------------------------------------"
 
-    @spot = current_user.spots.find_by(id: params[:id])
-
-    if @spot.update(spot_params)
-      redirect_to @spot, notice: "スポットを更新しました"
-    else
-      puts "もう一度入力してね"
-      render :edit
-    end
-  end
 
   private
 

@@ -6,8 +6,11 @@
   }
 </style>
 
-<div class="container mx-auto">
-  <div class="page-move flex flex-row justify-between pt-8 pb-8 mx-auto">
+<div class="container mx-auto px-4">
+
+  <%= render 'shared/flash_message'%>
+
+  <div class="page-move flex flex-row justify-between pt-4 pb-4 mx-auto">
     <%= link_to '＜ 探索に戻る', spots_path, class: 'back-link font-bold' %>
     <% if @spot.user == current_user %>
       <div class="flex justify-end">
@@ -43,10 +46,9 @@
 
       <div class="map-container" id="map"></div>
 
-      <div class="nearby-title">近くのスポット(Coming Soon)</div>
-      <div class="nearby-spots">
-        <div class="spot">近くのスポットA</div>
-        <div class="spot">近くのスポットB</div>
+      <div class="near-spots-title">近くのスポット(Coming Soon...)</div>
+      <div class="near-spots-place">
+
       </div>
     </div>
   </div>
