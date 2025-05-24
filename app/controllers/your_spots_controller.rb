@@ -1,8 +1,8 @@
 class YourSpotsController < ApplicationController
   before_action :authenticate_user!
-  
+
   def index
-    @spots = current_user.spots
+    @spots = current_user.spots.page(params[:page])
   end
 
   def show
