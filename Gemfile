@@ -76,6 +76,9 @@ gem "bootsnap", require: false
     gem "tailwindcss-ruby"
     gem "tailwindcss-rails"
 
+    # ページネーション
+    gem 'kaminari'
+
 # -------- ここまで --------
 
 group :development, :test do
