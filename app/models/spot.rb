@@ -19,6 +19,8 @@ class Spot < ApplicationRecord
   has_one_attached :spot_image
 
   def latlng_uniq
+    return unless new_record?
+    
     if Spot.where(latitude: latitude, longitude: longitude).exists?
       errors.add(:base, "同じ緯度・経度のスポットはすでに存在します。")
     end
@@ -37,21 +39,5 @@ class Spot < ApplicationRecord
 
     geocoder_str = geocoder_results.map{ |result| result.data["formatted_address"]}.join
     geocoder_str.include?("埼玉県")
-
-    # geocoder_results.any? do |result|
-      # address = result.data["formatted_address"]
-      # address_str
-      # address_str = address.join(",")
-
-
-        # address = result.data["address"] || {}      
-      # 例えば英語表記で"province"に"Saitama Prefecture"が含まれているかチェック
-        # address["province"] == "Saitama Prefecture" ||
-      # 日本語表記で"埼玉県"が含まれているかどうかもチェック
-        # address["state"] == "埼玉県" ||
-        # address.values.any? { |v| v.to_s.include?("埼玉県") }
-    # end
-    # binding.pry
-    # address_str.include?("埼玉県")
   end
 end
