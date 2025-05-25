@@ -12,7 +12,7 @@
 <!-- EditMacker 関数を API 読み込み後に実行するように指定（callback=EditMacker） -->
 <!-- async defer で非同期に読み込み → ページ表示が速くなる -->
 <script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=EditMacker">
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=EditMacker&language=ja">
 </script>
 
 <script>
