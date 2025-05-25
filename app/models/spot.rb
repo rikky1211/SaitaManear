@@ -35,13 +35,23 @@ class Spot < ApplicationRecord
   def in_saitama_prefecture?(geocoder_results)
     return false if geocoder_results.blank?
 
-    geocoder_results.any? do |result|
-      address = result.data["address"] || {}
+    geocoder_str = geocoder_results.map{ |result| result.data["formatted_address"]}.join
+    geocoder_str.include?("埼玉県")
+
+    # geocoder_results.any? do |result|
+      # address = result.data["formatted_address"]
+      # address_str
+      # address_str = address.join(",")
+
+
+        # address = result.data["address"] || {}      
       # 例えば英語表記で"province"に"Saitama Prefecture"が含まれているかチェック
-      address["province"] == "Saitama Prefecture" ||
+        # address["province"] == "Saitama Prefecture" ||
       # 日本語表記で"埼玉県"が含まれているかどうかもチェック
-      address["state"] == "埼玉県" ||
-      address.values.any? { |v| v.to_s.include?("埼玉県") }
-    end
+        # address["state"] == "埼玉県" ||
+        # address.values.any? { |v| v.to_s.include?("埼玉県") }
+    # end
+    # binding.pry
+    # address_str.include?("埼玉県")
   end
 end
