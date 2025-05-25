@@ -20,6 +20,7 @@ class SpotsController < ApplicationController
     if @spot.save
       redirect_to @spot, notice: "スポットを新規登録しました"
     else
+      logger.debug @spot.errors.full_messages
       flash.now[:error] = "新規スポット登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
