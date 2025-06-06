@@ -9,5 +9,5 @@ class User < ApplicationRecord
 
   has_many :spots, dependent: :destroy
 
-  enum :role, { general: 0, admin: 1 }
+  enum :role, { general: 0, admin: 1, super_admin: 2 }
 end
