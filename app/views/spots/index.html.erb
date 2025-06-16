@@ -1,11 +1,9 @@
 <div id="map"></div>
 
 <script>
-
-
   async function SearchMarker() {
     const { Map, InfoWindow } = await google.maps.importLibrary("maps");
-    const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+    const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker");
 
     let map; // グローバルに定義
     
@@ -23,16 +21,22 @@
 
       map = new Map(mapElement, {
         center: userLatLng,
-        zoom: 15
+        zoom: 15,
+        mapId: "<%= ENV['GOOGLE_MAPS_ID_API_KEY'] %>"
+      });
+
+      const pinCurrentLocation = new PinElement({
+        background: "#0080c6",
+        borderColor: "#0080ff",
+        glyphColor: '#ffffff',
+
       });
 
       // 現在地のマーカーを入れる
       new AdvancedMarkerElement({
         map: map,
         position: userLatLng,
-        icon: {
-          url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
-        }
+        content: pinCurrentLocation.element,
       });
 
       // 投稿されているマーカーを追加
@@ -58,7 +62,7 @@
             });
 
             // マーカーにクリックイベントを追加
-            marker.addListener('click', function() {
+            marker.addListener('gmp-click', function() {
               infoWindow.open(map, marker);
             });
 
