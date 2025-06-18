@@ -32,9 +32,9 @@
   <body>
     <div class="fixed top-0 left-0 right-0" >
       <% if signed_in? %>
-        <%= render 'shared/header' %>
+        <%= render 'shared/common/header' %>
       <% else %>
-        <%= render 'shared/before_login_header' %>
+        <%= render 'shared/common/before_login_header' %>
       <% end %>
     </div>
 
@@ -44,9 +44,9 @@
 
     <div class="fixed bottom-0 bg-green-200 flex w-full items-center text-xs py-2 border-t border-green-400">
       <% if signed_in? %>
-        <%= render 'shared/footer' %>
+        <%= render 'shared/common/footer' %>
       <% else %>
-        <%= render 'shared/before_login_footer' %>
+        <%= render 'shared/common/before_login_footer' %>
       <% end %>
     </div>
   </body>
