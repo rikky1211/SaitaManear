@@ -30,7 +30,7 @@
     // 地図要素を取得
     const gmpMap = document.getElementById('map');
 
-    console.log("gmp:",gmpMap.innerMap);
+    // console.log("gmp:",gmpMap.innerMap);
     const map = await gmpMap.innerMap;
 
     // 現在地を取得
@@ -42,16 +42,9 @@
         lng: position.coords.longitude
       };
 
-      console.log("map",map)
+      // console.log("map",map)
 
       map.setCenter(userLatLng);
-
-      // 初期化は一番上で設定。 
-      // map = new Map(mapElement, {
-      //   center: userLatLng,
-      //   zoom: 15,
-      //   mapId: "<%= ENV['GOOGLE_MAPS_ID_API_KEY'] %>"
-      // });
 
       const pinCurrentLocation = new PinElement({
         background: "#0080c6",
@@ -115,7 +108,7 @@
 </script>
 
 <script>
-  window.addEventListener('load', function() {
+  window.addEventListener('turbo:load', function() {
     // APIが既に読み込まれている場合はすぐに実行、そうでなければ少し待つ
     if (window.google && window.google.maps) {
       initMap();
