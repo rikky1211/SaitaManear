@@ -20,14 +20,14 @@ class Spot < ApplicationRecord
 
   def latlng_uniq
     return unless new_record?
-    
+
     if Spot.where(latitude: latitude, longitude: longitude).exists?
       errors.add(:base, "同じ緯度・経度のスポットはすでに存在します。")
     end
   end
 
   def must_be_in_saitama
-    results = Geocoder.search([latitude, longitude])
+    results = Geocoder.search([ latitude, longitude ])
     Rails.logger.debug "Geocoder results: #{results.map(&:data)}"
     unless in_saitama_prefecture?(results)
       errors.add(:base, "埼玉県以外の場所は登録できません。")
@@ -37,7 +37,7 @@ class Spot < ApplicationRecord
   def in_saitama_prefecture?(geocoder_results)
     return false if geocoder_results.blank?
 
-    geocoder_str = geocoder_results.map{ |result| result.data["formatted_address"]}.join
+    geocoder_str = geocoder_results.map { |result| result.data["formatted_address"] }.join
     geocoder_str.include?("埼玉県")
   end
 end
