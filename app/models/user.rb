@@ -8,6 +8,8 @@ class User < ApplicationRecord
   validates :name, presence: true
 
   has_many :spots, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_to_spots, through: :favorites, source: :spot
 
   enum :role, { general: 0, admin: 1, super_admin: 2 }
 end
