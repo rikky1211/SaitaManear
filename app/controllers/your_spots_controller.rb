@@ -32,6 +32,9 @@ class YourSpotsController < ApplicationController
       redirect_to your_spots_path, notice: "スポットを削除しました"
   end
 
+  def favorites
+  end
+
 private
 
   def spot_params
