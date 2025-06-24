@@ -79,6 +79,10 @@ gem "bootsnap", require: false
     # ページネーション
     gem "kaminari"
 
+    # Google認証用(tailwindcssはすでにインストール済み)
+    gem 'omniauth-google-oauth2'
+    # gem 'tailwindcss-rails'
+
 # -------- ここまで --------
 
 group :development, :test do
