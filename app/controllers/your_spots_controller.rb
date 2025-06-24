@@ -32,6 +32,10 @@ class YourSpotsController < ApplicationController
       redirect_to your_spots_path, notice: "スポットを削除しました"
   end
 
+  def favorites
+    @spots = current_user.favorite_to_spots.page(params[:page])
+  end
+
 private
 
   def spot_params

@@ -12,9 +12,13 @@
 
   <div class="page-move flex flex-row justify-between pt-4 pb-4 mx-auto">
     <%= link_to '＜ 探索に戻る', spots_path, class: 'back-link font-bold' %>
-    <% if @spot.user == current_user %>
+    <% if current_user %>
       <div class="flex justify-end">
-        <%= link_to 'マイスポット一覧へ ＞', your_spots_path, class: 'font-bold' %>
+        <% if current_user.own?(@spot) %>
+          <%= link_to 'マイスポット一覧へ ＞', your_spots_path, class: 'font-bold' %>
+        <% else %>
+          <%= render 'shared/favorite/favorite_button', { spot: @spot } %>
+        <% end %>
       </div>
     <% end %>
   </div>

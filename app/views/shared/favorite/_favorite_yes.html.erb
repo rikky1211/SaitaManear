@@ -1,0 +1,5 @@
+<%= link_to favorites_path(spot_id: spot.id), id: "favorite-button-for-spot-#{spot.id}", data: { turbo_method: :post } do %>
+  <div class="w-20 h-20">
+    <%= image_tag "/assets/unfavorite.png" %>
+  </div>
+<% end %>
