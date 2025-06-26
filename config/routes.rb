@@ -23,13 +23,5 @@ Rails.application.routes.draw do
     end
   end
   resource :your_profile, only: %i[show edit update destroy]
-  
-  # Google認証
-  # Googleからの認証コールバックを受け取る
-  get 'auth/:provider/callback', to: 'sessions#create'
-  # 認証に失敗した場合、ルートパス（/）にリダイレクト
-  get 'auth/failure', to: redirect('/')
-  # ログアウトリクエストを処理し、「as: 'logout'」で[logout_path]というヘルパーメソッドを定義。
-  post 'logout', to: 'sessions#destroy', as: 'logout'
 
 end
