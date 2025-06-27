@@ -34,10 +34,20 @@ class User < ApplicationRecord
 
   # providerとuidを使ってユーザーを検索し、存在しなければ新規作成。
   def self.from_omniauth(auth)
-  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    user.name = auth.info.name
-    user.email = auth.info.email
-    user.password = Devise.friendly_token[0, 20]
+    user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.name = auth.info.name
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+    end
+
+    # デバッグ：エラーが出た時にどのようなエラーが出るか確認。
+    if user.save
+      Rails.logger.debug "User saved: #{user.inspect}"
+    else
+      Rails.logger.debug "User save failed: #{user.errors.full_messages}"
+    end
+
+    return user
   end
 
   def self.create_unique_string
