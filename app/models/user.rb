@@ -2,10 +2,12 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+         :recoverable, :rememberable, :validatable,
+         :omniauthable, omniauth_providers: [:google_oauth2]
 
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true
+  validates :uid, presence: true, uniqueness: { scope: :provider }, if: -> { uid.present? }
 
   has_many :spots, dependent: :destroy
   has_many :favorites, dependent: :destroy
@@ -28,5 +30,27 @@ class User < ApplicationRecord
 
   def own?(spot)
     spot.user_id == self.id
+  end
+
+  # providerとuidを使ってユーザーを検索し、存在しなければ新規作成。
+  def self.from_omniauth(auth)
+    user = where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+      user.name = auth.info.name
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0, 20]
+    end
+
+    # デバッグ：エラーが出た時にどのようなエラーが出るか確認。
+    if user.save
+      Rails.logger.debug "User saved: #{user.inspect}"
+    else
+      Rails.logger.debug "User save failed: #{user.errors.full_messages}"
+    end
+
+    return user
+  end
+
+  def self.create_unique_string
+    SecureRandom.uuid
   end
 end

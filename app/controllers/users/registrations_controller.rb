@@ -1,6 +1,25 @@
+# registrations_controller.rb
+# ユーザー登録やユーザー編集のフォーム
+
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  def build_resource(hash = {})
+    hash[:uid] = User.create_unique_string
+    super
+  end
+
+  def update_resource(resource, params)
+    return super if params['password'].present?
+  
+    resource.update_without_password(params.except('current_password'))
+  end
+end
+
+
+  # -----------------------------------
+  # default
+  # -----------------------------------
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
@@ -59,4 +78,3 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
-end

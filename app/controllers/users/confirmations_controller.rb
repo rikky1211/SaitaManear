@@ -1,3 +1,6 @@
+# confirmations_controller.rb
+# パスワード再発行のフォーム
+
 # frozen_string_literal: true
 
 class Users::ConfirmationsController < Devise::ConfirmationsController

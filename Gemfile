@@ -79,6 +79,13 @@ gem "bootsnap", require: false
     # ページネーション
     gem "kaminari"
 
+    # Google認証用(tailwindcssはすでにインストール済み)
+    # GoogleのOAuth2を利用した認証を提供するためのGem。ユーザーがGoogleアカウントでサインインできるようにする。
+    gem 'omniauth-google-oauth2'
+    # RailsでOmniAuthを使用する際のCSRF（Cross-Site Request Forgery）攻撃から
+    # アプリケーションを保護するためのGem。セキュリティを強化する。
+    gem 'omniauth-rails_csrf_protection'
+
 # -------- ここまで --------
 
 group :development, :test do
