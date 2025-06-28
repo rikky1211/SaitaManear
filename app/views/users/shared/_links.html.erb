@@ -14,12 +14,23 @@
   <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />
 <% end %>
 
-<%- if devise_mapping.lockable? && resource_class.unlock_strategy_enabled?(:email) && controller_name != 'unlocks' %>
+<%- if devise_mapping.lockable? 
+        && resource_class.unlock_strategy_enabled?(:email) 
+        && controller_name != 'unlocks' %>
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end %>
 
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
-    <%= button_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider), data: { turbo: false } %><br />
+    <% if provider == :google_oauth2 %>
+      <%= button_to omniauth_authorize_path(resource_name, provider),
+                  method: :post,
+                  data: { turbo: false },
+                  class: "bg-white text-black flex items-center gap-2" do %>
+
+        <%# Googleのアイコン（画像 or heroiconsなど）を表示 %>
+        <img src="/assets/web_light_rd_ctn.svg" alt="Google" class="w-5 h-5">
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>
