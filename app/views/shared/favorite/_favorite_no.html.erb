@@ -1,5 +1,5 @@
 <%= link_to favorite_path(current_user.favorites.find_by(spot_id: spot.id)), id: "unfavorite-button-for-spot-#{spot.id}", data: { turbo_method: :delete } do %>
   <div class="w-20 h-20">
-    <%= image_tag "favorite/favorite.png", alt: "お気に入り登録ボタン", class: "w-5 h-5" %>
+    <%= image_tag "favorite/favorite.png", alt: "お気に入り登録ボタン", class: "w-8 h-8" %>
   </div>
 <% end %>
