@@ -15,7 +15,7 @@ class Spot < ApplicationRecord
   validate :must_be_in_saitama
 
   has_many :favorites, dependent: :destroy
-  
+
   belongs_to :user
   # belongs_to :town
   has_one_attached :spot_image

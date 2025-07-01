@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:google_oauth2]
+         :omniauthable, omniauth_providers: [ :google_oauth2 ]
 
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true
@@ -47,7 +47,7 @@ class User < ApplicationRecord
       Rails.logger.debug "User save failed: #{user.errors.full_messages}"
     end
 
-    return user
+    user
   end
 
   def self.create_unique_string
