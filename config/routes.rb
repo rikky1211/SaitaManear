@@ -19,7 +19,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "top#index"
-  resources :spots, only: %i[index new create show]
+  resources :spots, only: %i[index new create show] do
+    collection do
+      get :search
+    end
+  end
   resources :favorites, only: %i[create destroy]
   resources :your_spots, only: %i[index show edit update destroy] do
     # [your_spots]の中に[your_spots/favorite]というGETリンクを作成する。

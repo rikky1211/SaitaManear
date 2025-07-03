@@ -24,6 +24,10 @@ class SpotsController < ApplicationController
       flash.now[:error] = "新規スポット登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
+
+    def search
+
+    end
   end
 
 
