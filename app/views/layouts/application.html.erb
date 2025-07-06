@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <head>
     <title><%= content_for(:title) || "SaitaManear" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -29,8 +29,8 @@
     <% end %>
   </head>
 
-  <body>
-    <div class="fixed top-0 left-0 right-0" >
+  <body class="bg-lime-100 h-full">
+    <div class="fixed top-0 left-0 right-0 z-10 bg-green-500" >
       <% if signed_in? %>
         <%= render 'shared/common/header' %>
       <% else %>
@@ -38,11 +38,11 @@
       <% end %>
     </div>
 
-    <div class="pt-24 pb-24">
+    <div class="pt-24 pb-24 min-h-screen">
           <%= yield %>
     </div>
 
-    <div class="fixed bottom-0 bg-green-200 flex w-full items-center text-xs py-2 border-t border-green-400">
+    <div class="fixed bottom-0 bg-green-500 flex w-full items-center text-xs py-2 border-t border- border-green-800 z-10">
       <% if signed_in? %>
         <%= render 'shared/common/footer' %>
       <% else %>

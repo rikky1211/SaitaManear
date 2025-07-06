@@ -26,11 +26,8 @@ class SpotsController < ApplicationController
     end
 
     def search
-
     end
   end
-
-
 
   private
 

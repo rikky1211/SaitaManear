@@ -5,6 +5,8 @@
     <span>ホーム</span>
   <% end %>
 
+  <span class="text-gray-400 text-2xl">|</span>
+
   <%= link_to new_user_session_path, class:"btn btn-ghost flex flex-col items-center font-bold flex-1 min-w-0" do %>
     <svg class="h-6 w-6 text-green-700" fill="currentColor" viewBox="0 0 24 24">
       <path d="M6 2h12v20H6z"/>
@@ -12,6 +14,7 @@
     <span>地点登録</span>
   <% end %>
 
+  <span class="text-gray-400 text-2xl">|</span>
 
   <%= link_to spots_path, class:"btn btn-ghost flex flex-col items-center font-bold flex-1 min-w-0" do %>
     <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -19,6 +22,8 @@
     </svg>
     <span>探索</span>
   <% end %>
+
+  <span class="text-gray-400 text-2xl">|</span>
 
   <%= link_to search_spots_path, class:"btn btn-ghost flex flex-col items-center font-bold flex-1 min-w-0" do %>
     <svg class="h-6 w-6 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">

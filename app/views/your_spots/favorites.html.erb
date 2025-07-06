@@ -16,6 +16,7 @@
               <p class="font-bold"><%= spot.name %></p>
               <p class="font-bold">市区町村：</p>
               <p class="font-bold"><%= spot.address.presence || "XXXXXXXXX" %></p>
+              <%= link_to "スポット詳細へ", spot_path(spot), class: "font-bold" %>
             </div>
 
             <!-- 中央：画像 -->
