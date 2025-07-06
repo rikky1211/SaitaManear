@@ -1,0 +1,22 @@
+<!-- ✅ キャラクター台詞 -->
+<div class="my-10 mx-auto text-center">
+  <h1>
+    え？私は埼玉県民じゃない…？
+  </h1>
+
+  <h1 class="text-3xl font-bold text-orange-500">
+    春日部つむぎ<br />
+    「お前が埼玉県民になるんだよ！」
+  </h1>
+  <h1 class="text-3xl font-bold text-lime-500 mt-6">
+    ずんだもん<br />
+    「えぇ…」
+  </h1>
+</div>
+
+<!-- ✅ S3からの画像表示（正方形縮小・利用規約の直前） -->
+<% if @background_spot&.spot_image.attached? %>
+  <div class="flex justify-center mt-10">
+    <%= image_tag @background_spot.spot_image, class: "w-60 h-60 object-cover rounded-lg shadow-md", alt: "ランダムスポット画像" %>
+  </div>
+<% end %>
