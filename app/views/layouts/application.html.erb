@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-full">
   <head>
     <title><%= content_for(:title) || "SaitaManear" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -29,7 +29,7 @@
     <% end %>
   </head>
 
-  <body class="bg-lime-100">
+  <body class="bg-lime-100 h-full">
     <div class="fixed top-0 left-0 right-0 z-10 bg-green-500" >
       <% if signed_in? %>
         <%= render 'shared/common/header' %>
