@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "top#index"
-  get "sorry', to: 'top#sorry'
+  get 'sorry', to: 'top#sorry'
 
   resources :spots, only: %i[index new create show] do
     collection do
