@@ -1,13 +1,19 @@
     <%= form_with(model: @spot, local: true, url: form_url, html: { multipart: true, class: "space-y-6" }) do |f| %>
       <!-- マーカー名称 -->
       <div>
-        <%= f.label :name, "マーカー名称", class: "block font-medium text-gray-700 mb-1" %>
+        <%= f.label :name, class: "block font-medium text-gray-700 font-bold mb-1" do %>
+          マーカー名称
+          <span class="text-red-400 text-sm font-bold ml-2"> *必須</span>
+        <% end %>
         <%= f.text_field :name, class: "w-full border border-gray-300 rounded-md p-2 bg-white" %>
       </div>
 
       <!-- 画像アップロード -->
       <div>
-        <%= f.label :spot_image, "画像", class: "block font-medium text-gray-700 mb-1" %>
+        <%= f.label :spot_image, class: "block font-medium text-gray-700 mb-1" do %>
+          画像
+          <span class="text-red-400 text-sm font-bold ml-2"> *必須</span>
+        <% end %>
         <%= f.file_field :spot_image, class: "w-full bg-white" %>
       </div>
 
@@ -29,7 +35,10 @@
 
       <!-- Google Map -->
       <div>
-        <p class="font-medium text-gray-700 mb-2">地図からスポット位置を選択</p>
+        <p class="font-medium text-gray-700 mb-2">
+          地図からスポット位置を選択
+          <p class="text-red-400 text-sm font-bold ml-2"> *必須(埼玉県限定で登録可能)</p>
+        </p>
         <div id="map" class="w-full h-64 border rounded-md mb-2"></div>
         <%= f.hidden_field :latitude, id: "latitude" %>
         <%= f.hidden_field :longitude, id: "longitude" %>
