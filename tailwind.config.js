@@ -5,8 +5,9 @@ module.exports = {
     './app/javascript/**/*.js'   // JavaScriptファイルも監視対象に
 
   ],
-  theme: {
-    extend: {},
+
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["lemonade"], // 例えばこの2つを読み込む
   },
-  plugins: [],
 }
