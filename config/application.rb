@@ -23,5 +23,8 @@ module Myapp
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # 追加(valiant作成時の処理で使うvariantプロセッサの設定をvipsにする)
+    config.active_storage.variant_processor = :vips
   end
 end
