@@ -7,9 +7,14 @@ class Spot < ApplicationRecord
   after_validation :reverse_geocode, if: -> { latitude.present? && longitude.present? }
 
   validates :name, presence: true
-  validates :spot_image, presence: true
   validates :latitude, presence: true
   validates :longitude, presence: true
+
+  ACCEPTED_CONTENT_TYPES = %w[image/jpeg image/png image/gif image/webp image/heic].freeze
+  validates :spot_image, 
+              presence: true,
+              content_type: ACCEPTED_CONTENT_TYPES,
+              size: { less_than_or_equal_to: 5.megabytes }
 
   validate :latlng_uniq
   validate :must_be_in_saitama
