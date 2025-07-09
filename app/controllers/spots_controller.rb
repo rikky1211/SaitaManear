@@ -14,19 +14,30 @@ class SpotsController < ApplicationController
   end
 
   def create
-    @spot = Spot.new(spot_params)
-    @spot.user = current_user
+    @spot = current_user.spots.build(spot_params)
 
-    if @spot.save
-      redirect_to @spot, notice: "スポットを新規登録しました"
+    if @spot.valid?
+      begin
+        @spot.spot_image = \
+          ImageProcessable.process_and_transform_image(params[:spot][:spot_image], 854) \
+            if params[:spot][:spot_image].present?
+        
+        if @spot.save
+          redirect_to @spot, notice: "スポットを新規登録しました"
+        end
+
+      rescue ImageProcessable::ImageProcessingError => e
+        flash.now[:error] = e.message
+        render :new, status: :unprocessable_entity
+      end
     else
       logger.debug @spot.errors.full_messages
       flash.now[:error] = "新規スポット登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
+  end
 
-    def search
-    end
+  def search
   end
 
   private
