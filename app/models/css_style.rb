@@ -1,0 +1,2 @@
+class CssStyle < ApplicationRecord
+end
