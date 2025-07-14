@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_07_12_152903) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_14_041510) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -61,6 +61,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_12_152903) do
     t.index ["spot_id"], name: "index_favorites_on_spot_id"
     t.index ["user_id", "spot_id"], name: "index_favorites_on_user_id_and_spot_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "season_tags", force: :cascade do |t|
+    t.string "season", null: false
+    t.bigint "css_style_id_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["css_style_id_id"], name: "index_season_tags_on_css_style_id_id"
   end
 
   create_table "spots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
