@@ -65,10 +65,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_07_14_041510) do
 
   create_table "season_tags", force: :cascade do |t|
     t.string "season", null: false
-    t.bigint "css_style_id_id", null: false
+    t.bigint "css_style_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["css_style_id_id"], name: "index_season_tags_on_css_style_id_id"
+    t.index ["css_style_id"], name: "index_season_tags_on_css_style_id"
   end
 
   create_table "spots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
