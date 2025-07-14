@@ -13,5 +13,4 @@ class TopController < ApplicationController
 
   def sorry
   end
-
 end

@@ -43,11 +43,7 @@
     </div>
 
     <div class="fixed bottom-0 bg-green-500 flex w-full items-center text-xs py-2 border-t border- border-green-800 z-10">
-      <% if signed_in? %>
         <%= render 'shared/common/footer' %>
-      <% else %>
-        <%= render 'shared/common/before_login_footer' %>
-      <% end %>
     </div>
   </body>
 </html>

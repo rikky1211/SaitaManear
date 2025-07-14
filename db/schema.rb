@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_26_042603) do
+ActiveRecord::Schema[8.0].define(version: 2025_07_14_042251) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pgcrypto"
@@ -43,6 +43,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_26_042603) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "css_styles", force: :cascade do |t|
+    t.string "style_name", null: false
+    t.string "style_color", null: false
+    t.string "style_daisyui", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["style_name", "style_color", "style_daisyui"], name: "idx_on_style_name_style_color_style_daisyui_751e22f8a7", unique: true
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.uuid "user_id", null: false
     t.uuid "spot_id", null: false
@@ -52,6 +61,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_26_042603) do
     t.index ["spot_id"], name: "index_favorites_on_spot_id"
     t.index ["user_id", "spot_id"], name: "index_favorites_on_user_id_and_spot_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "season_tags", force: :cascade do |t|
+    t.string "season", null: false
+    t.bigint "css_style_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["css_style_id"], name: "index_season_tags_on_css_style_id"
+  end
+
+  create_table "spot_season_tags", force: :cascade do |t|
+    t.uuid "spot_id", null: false
+    t.bigint "season_tag_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["season_tag_id"], name: "index_spot_season_tags_on_season_tag_id"
+    t.index ["spot_id", "season_tag_id"], name: "index_spot_season_tags_on_spot_id_and_season_tag_id", unique: true
+    t.index ["spot_id"], name: "index_spot_season_tags_on_spot_id"
   end
 
   create_table "spots", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
