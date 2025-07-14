@@ -7,6 +7,6 @@ class CreateSpotSeasonTags < ActiveRecord::Migration[8.0]
       t.timestamps
     end
 
-    add_index :spot_season_tags, [:spot_id, :season_tag_id], unique: true
+    add_index :spot_season_tags, [ :spot_id, :season_tag_id ], unique: true
   end
 end

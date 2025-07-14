@@ -37,7 +37,7 @@ gem "bootsnap", require: false
   # 1. defaultをコメントアウト/S3導入時にインストール済み
   # gem "image_processing", "~> 1.2"
   # 2. validateのコードを省略して記載できるようにするGem
-  gem 'active_storage_validations'
+  gem "active_storage_validations"
 
   # デバッグGem
   gem "pry-byebug"
@@ -80,7 +80,7 @@ gem "bootsnap", require: false
 
     # ページネーション
     gem "kaminari"
-    gem 'kaminari-tailwind'
+    gem "kaminari-tailwind"
 
     # Google認証用(tailwindcssはすでにインストール済み)
     # GoogleのOAuth2を利用した認証を提供するためのGem。ユーザーがGoogleアカウントでサインインできるようにする。

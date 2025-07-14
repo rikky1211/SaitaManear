@@ -21,7 +21,7 @@ class SpotsController < ApplicationController
         @spot.spot_image = \
           ImageProcessable.process_and_transform_image(params[:spot][:spot_image], 854) \
             if params[:spot][:spot_image].present?
-        
+
         if @spot.save
           redirect_to @spot, notice: "スポットを新規登録しました"
         end

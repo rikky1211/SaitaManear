@@ -11,7 +11,7 @@ class Spot < ApplicationRecord
   validates :longitude, presence: true
 
   ACCEPTED_CONTENT_TYPES = %w[image/jpeg image/png image/gif image/webp image/heic].freeze
-  validates :spot_image, 
+  validates :spot_image,
               presence: true,
               content_type: ACCEPTED_CONTENT_TYPES,
               size: { less_than_or_equal_to: 5.megabytes }
@@ -19,6 +19,8 @@ class Spot < ApplicationRecord
   validate :latlng_uniq
   validate :must_be_in_saitama
 
+  has_many :spot_season_tags, dependent: :destroy
+  has_many :season_tags, through: :spot_season_tags
   has_many :favorites, dependent: :destroy
 
   belongs_to :user
