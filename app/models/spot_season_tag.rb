@@ -1,0 +1,2 @@
+class SpotSeasonTag < ApplicationRecord
+end
