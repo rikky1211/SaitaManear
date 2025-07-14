@@ -4,6 +4,8 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
   def build_resource(hash = {})
     hash[:uid] = User.create_unique_string
     super
@@ -13,6 +15,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     return super if params["password"].present?
 
     resource.update_without_password(params.except("current_password"))
+  end
+
+  protected
+
+  # devise/ユーザ情報更新(edit/update)のページにて、userのアカウント名(name)を持って来れるように設定
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 end
 
