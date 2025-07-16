@@ -1,0 +1,31 @@
+<div class="flex flex-col items-center pt-10">
+  <div class="card w-full max-w-sm bg-white border-4 border-orange-200 shadow-xl">
+    <div class="card-body">
+      <h2 class="card-title justify-center text-xl">アカウント情報</h2>
+
+      <div class="form-control mb-4">
+        <label class="label text-sm text-gray-600">名前</label>
+        <p class="text-lg font-semibold"><%= current_user.name %></p>
+      </div>
+
+      <div class="form-control mb-4">
+        <label class="label text-sm text-gray-600">メールアドレス</label>
+        <p class="text-lg font-semibold">*******</p>
+      </div>
+
+      <div class="form-control mt-6">
+        <%= link_to "アカウント編集", edit_user_registration_path, class: "btn btn-warning w-full hover:bg-blue-300" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card w-full max-w-sm mt-8 bg-white border-4 border-red-200 shadow-xl">
+    <div class="card-body items-center">
+      <p class="text-sm text-gray-600 mb-2">ログアウトしますか？</p>
+      <%= button_to "ログアウト", destroy_user_session_path,
+          method: :delete,
+          class: "btn btn-outline btn-error w-full",
+          data: { confirm: "ログアウトしますか？", turbo_confirm: "ログアウトしますか？" } %>
+    </div>
+  </div>
+</div>

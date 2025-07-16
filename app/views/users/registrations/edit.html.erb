@@ -1,9 +1,10 @@
 <div class="flex flex-col items-center pt-10">
   <div class="card w-full max-w-sm bg-orange-200 shadow-xl">
+    <%= render 'shared/flash_message'%>
     <div class="card-body">
       <h2 class="card-title justify-center">アカウント編集</h2>
 
-      <%= form_for(resource, as: resource_name, url: your_profile_path(resource_name), html: { method: :put }) do |f| %>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "users/shared/error_messages", resource: resource %>
 
         <div class="form-control mb-4">

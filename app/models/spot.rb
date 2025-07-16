@@ -14,7 +14,7 @@ class Spot < ApplicationRecord
   validates :spot_image,
               presence: true,
               content_type: ACCEPTED_CONTENT_TYPES,
-              size: { less_than_or_equal_to: 5.megabytes }
+              size: { less_than_or_equal_to: 10.megabytes }
 
   validate :latlng_uniq
   validate :must_be_in_saitama

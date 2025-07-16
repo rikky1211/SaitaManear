@@ -11,10 +11,22 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  def update_resource(resource, params)
-    return super if params["password"].present?
+  def show
+    @user = current_user
+  end
 
-    resource.update_without_password(params.except("current_password"))
+  def update
+    self.resource = current_user
+
+      # 2. 更新処理を実行
+    if update_resource(resource, account_update_params)
+      flash[:notice] = "アカウントを更新しました"
+      redirect_to user_profile_path
+    else
+      flash.now[:error] = "アカウント更新に失敗しました"
+      clean_up_passwords resource
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   protected
@@ -22,6 +34,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # devise/ユーザ情報更新(edit/update)のページにて、userのアカウント名(name)を持って来れるように設定
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+  end
+
+  def update_resource(resource, params)
+    return super if params["password"].present?
+
+    resource.update_without_password(params.except("current_password"))
   end
 end
 
