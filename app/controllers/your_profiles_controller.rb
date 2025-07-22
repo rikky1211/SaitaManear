@@ -10,18 +10,28 @@ class YourProfilesController < ApplicationController
   end
 
   def update
-    @user = User.find(current_user.id)
-    if @user.update(your_profile_params)
-      redirect_to your_profile_path, notice: "プロフィールを更新しました"
+    @user = current_user
+
+    # パスワードが存在すればパスワード更新
+    if your_profile_params[:password].present?
+      judge = @user.update_with_password(your_profile_params)
     else
-      flash.now[:error] = "アカウント名変更に失敗しました"
-      render :edit, status: :unprocessable_entity
+      judge = @user.update(your_profile_params.except(:password, :password_confirmation, :current_password))
+    end
+
+    if judge
+      redirect_to user_profile_path, notice: "プロフィールを更新しました"
+    else
+      puts "#{@user.errors.full_messages.join(",")}"
+      flash.now[:alert] = "プロフィールの更新に失敗しました"
+      render 'users/registrations/edit', status: :unprocessable_entity
+
     end
   end
 
   private
 
   def your_profile_params
-    params.require(:user).permit(:name)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :current_password)
   end
 end

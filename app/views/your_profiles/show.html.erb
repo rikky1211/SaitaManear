@@ -5,34 +5,26 @@
   <div class="spot-card bg-orange-200 rounded-lg border-2 border-orange-300 border- p-4 space-y-6 max-w-5xl mx-auto">
     <div class="font-bold text-2xl">プロフィール</div>
 
-      <div class="flex flex-col p-3">
-        <div class="px-5">
-          <div class="text-bold text-xl">アカウント名</div>
-        <div class="px-10">
-          <%= current_user.name %>
+      <div class="flex flex-col px-3">
+        <div class="px-5 flex container">
+          <div class="text-bold">
+            アカウント名：<%= current_user.name %>
+          </div>
         </div>
       </div>
 
-      <div class="flex flex-col p-3">
-        <div class="px-5">
-          <div class="text-bold text-xl">
-            メールアドレス <br />
-            (変更機能未実装)</div>
-          <%= current_user.email %>
-        </div>
+      <div class="flex flex-row items-start justify-end px-10">
+        <%= link_to "編集", edit_user_registration_path, class: "bg-blue-500 hover:bg-blue-600 text-white w-25 py-2 rounded text-xs text-center" %>
       </div>
+    </div>
 
-      <div class="flex flex-row items-start pt-10 justify-end">
-        <%= link_to "編集", edit_your_profile_path(current_user), class: "bg-blue-500 hover:bg-blue-600 text-white w-25 py-2 rounded text-xs text-center" %>
-      </div>
+    <div class="p-3">
+     <%= button_to "ログアウト", destroy_user_session_path, method: :delete, 
+                              data: { turbo: false, confirm: "ログアウトしますか？" }, 
+                              class: "bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-xs text-center" %>
     </div>
   </div>
 
-  <div class="p-3">
-    <%= button_to "ログアウト", destroy_user_session_path, method: :delete, 
-                              data: { turbo: false, confirm: "ログアウトしますか？" }, 
-                              class: "bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-xs text-center" %>
-  </div>
 </div>
 
 <%= render 'shared/your_page_footer_form' %>

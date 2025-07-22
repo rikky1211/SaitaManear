@@ -7,6 +7,11 @@ Rails.application.routes.draw do
     unlocks: "users/unlocks",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
+  
+  devise_scope :user do
+    get "/users/your_profile", to: "users/registrations#show", as: 'user_profile'
+  end
+  
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -33,5 +38,4 @@ Rails.application.routes.draw do
       get :favorites
     end
   end
-  resource :your_profile, only: %i[show edit update destroy]
 end
