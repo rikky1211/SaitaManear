@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="h-full", data-theme="light">
+<html data-theme="light">
   <head>
     <title><%= content_for(:title) || "SaitaManear" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -29,7 +29,7 @@
     <% end %>
   </head>
 
-  <body class="bg-lime-100 h-full">
+  <body class="flex flex-grow flex-col item-center bg-lime-100">
     <div class="fixed top-0 left-0 right-0 z-10 bg-green-500" >
       <% if signed_in? %>
         <%= render 'shared/common/header' %>
