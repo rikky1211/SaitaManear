@@ -38,6 +38,7 @@ class SpotsController < ApplicationController
   end
 
   def search
+    @spots = Spot.all
   end
 
   private
