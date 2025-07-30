@@ -1,13 +1,133 @@
-<div class="flex items-center justify-center items-center bg-lime-100 pt-10">
-  <div class="card w-full max-w-sm border-red">
-    <div class="card-body">
-      <%= image_tag "sorry.png", alt: "現在製作中……"%>
-    </div>
+<!-- ✅ ローディング画面 -->
+<div id="loading-overlay" class="fixed inset-0 bg-white flex flex-col items-center justify-center z-0">
+  <%= image_tag 'now_loading.png', alt: "読み込み中", class: "w-80 h-80" %>
+  <p class="text-xl pt-2">近くのスポット確認中…</p>
+</div>
 
-    <h1 class="text-2xl text-center">
-      🚧現在製作中です🚧
-    </h1>
+<!-- 地図 -->
+<div id="map" class="h-80 w-full mb-4"></div>
+
+<!-- 近いスポット一覧 -->
+<div class="container mx-auto px-4 pb-16">
+  <div class="max-w-5xl mx-auto">
+    <%= render 'shared/flash_message' %>
+    <div id="spot-list" class="bg-orange-200 rounded-lg border border-orange-700 p-4 space-y-6">
+      <p>近くのスポットを表示中...</p>
+    </div>
   </div>
 </div>
 
+<!-- JavaScript -->
+<script>
+  function NearMarker() {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      const userLat = position.coords.latitude;
+      const userLng = position.coords.longitude;
 
+      const map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: userLat, lng: userLng },
+        zoom: 14
+      });
+
+      new google.maps.Marker({
+        position: { lat: userLat, lng: userLng },
+        map: map,
+        icon: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+        title: "現在地"
+      });
+
+      const spots = <%= raw @spots.map { |spot|
+        {
+          id: spot.id,
+          name: spot.name,
+          summary: spot.summary,
+          address: spot.address,
+          lat: spot.latitude,
+          lng: spot.longitude,
+          image_url: spot.spot_image.attached? ? url_for(spot.spot_image) : nil,
+          detail_url: spot_path(spot)
+        }
+      }.to_json %>;
+
+      function getDistance(lat1, lng1, lat2, lng2) {
+        const R = 6371e3;
+        const toRad = deg => deg * Math.PI / 180;
+        const φ1 = toRad(lat1);
+        const φ2 = toRad(lat2);
+        const Δφ = toRad(lat2 - lat1);
+        const Δλ = toRad(lng2 - lng1);
+        const a = Math.sin(Δφ / 2) ** 2 +
+                  Math.cos(φ1) * Math.cos(φ2) *
+                  Math.sin(Δλ / 2) ** 2;
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
+      }
+
+      spots.forEach(s => {
+        s.distance = getDistance(userLat, userLng, s.lat, s.lng);
+      });
+
+      const nearestSpots = spots.sort((a, b) => a.distance - b.distance).slice(0, 5);
+
+      const listEl = document.getElementById("spot-list");
+      listEl.innerHTML = "";
+
+      nearestSpots.forEach(spot => {
+        const card = document.createElement("div");
+        card.className = "bg-white border-2 border-orange-400 rounded-md px-8 py-4 shadow flex items-center justify-between";
+
+      const formatDistance = (meters) => {
+        return meters <= 1000
+          ? `${meters.toFixed(0)} m`
+          : `${(meters / 1000).toFixed(2)} km`;
+      };
+
+      const left = `
+        <div class="text-sm space-y-1">
+          <p class="font-bold">スポット名：${spot.name}</p>
+          <p class="font-bold">市区町村：${spot.address || 'XXXXXXXXX'}</p>
+          <p class="font-bold">距離：${formatDistance(spot.distance)}</p>
+          <a class="font-bold text-blue-500 underline" href="${spot.detail_url}">スポット詳細へ</a>
+        </div>`;
+
+        const center = spot.image_url ?
+          `<div class="w-30 h-30 bg-gray-300 mx-4 flex items-center justify-center overflow-hidden rounded">
+            <img src="${spot.image_url}" class="w-full h-full object-cover">
+          </div>` :
+          `<div class="w-30 h-30 bg-gray-300 mx-4 flex items-center justify-center overflow-hidden rounded">
+            <span class="text-gray-600 text-sm">画像</span>
+          </div>`;
+
+        card.innerHTML = left + center;
+        listEl.appendChild(card);
+
+        new google.maps.Marker({
+          position: { lat: spot.lat, lng: spot.lng },
+          map: map,
+          title: spot.name
+        });
+      });
+
+      // ✅ ローディング画像を非表示にする
+      document.getElementById("loading-overlay").style.display = "none";
+
+    }, function () {
+      alert("現在地の取得に失敗しました。位置情報の許可を確認してください。");
+      document.getElementById("loading-overlay").style.display = "none";
+    });
+  }
+</script>
+
+<!-- ✅ Google Maps API（callback=NearMarker） -->
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=NearMarker&language=ja">
+</script>
+
+<!-- ✅ スタイル -->
+<style>
+  #map {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+  }
+</style>
