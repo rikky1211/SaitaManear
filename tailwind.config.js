@@ -8,6 +8,5 @@ module.exports = {
 
   plugins: [require("daisyui")],
   daisyui: {
-    themes: ["lemonade"], // 例えばこの2つを読み込む
   },
 }
