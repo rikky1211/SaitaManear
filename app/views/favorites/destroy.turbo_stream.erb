@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "unfavorite-button-for-spot-#{@spot.id}" do %>
+  <%= render 'shared/favorites/favorite_yes', spot: @spot %>
+<% end %>

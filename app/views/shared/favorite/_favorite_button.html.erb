@@ -1,7 +1,0 @@
-<div class="ms-auto">
-  <% if current_user.favorite?(spot) %>
-    <%= render "shared/favorite/favorite_no", spot: spot %>
-  <% else %>
-    <%= render "shared/favorite/favorite_yes", spot: spot %>
-  <% end %>
-</div>
