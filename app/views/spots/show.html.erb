@@ -17,7 +17,7 @@
         <% if current_user.own?(@spot) %>
           <%= link_to 'マイスポット一覧へ ＞', your_spots_path, class: 'font-bold' %>
         <% else %>
-          <%= render 'shared/favorite/favorite_button', { spot: @spot } %>
+          <%= render 'shared/favorites/favorite_button', { spot: @spot } %>
         <% end %>
       </div>
     <% end %>
