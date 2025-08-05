@@ -1,9 +1,13 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
+  # デフォルトのDeviseモジュールを含めます。その他の利用可能なモジュールは次のとおりです:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [ :google_oauth2 ]
+  devise :database_authenticatable, 
+         :registerable,
+         :recoverable, 
+         :rememberable, 
+         :validatable,
+         :omniauthable, 
+         omniauth_providers: [ :google_oauth2 ]
 
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true
