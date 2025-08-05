@@ -2,7 +2,7 @@
   <div class="card w-full max-w-sm bg-orange-200 shadow-xl">
     <%= render 'shared/flash_message'%>
     <div class="card-body">
-      <h2 class="card-title justify-center">アカウント編集</h2>
+      <h2 class="card-title justify-center">アカウント登録情報 編集</h2>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "users/shared/error_messages", resource: resource %>
@@ -24,6 +24,11 @@
         <% end %>
 
         <div class="form-control mb-4">
+          <%= f.label :current_password, "現在のパスワード（変更確認用）", class: "label" %>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "input input-bordered" %>
+        </div>
+
+        <div class="form-control mb-4">
           <%= f.label :password, "新しいパスワード（#{@minimum_password_length}文字以上 / 変更しない場合は空欄）", class: "label" %>
           <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered" %>
         </div>
@@ -31,11 +36,6 @@
         <div class="form-control mb-4">
           <%= f.label :password_confirmation, "パスワード確認", class: "label" %>
           <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "input input-bordered" %>
-        </div>
-
-        <div class="form-control mb-4">
-          <%= f.label :current_password, "現在のパスワード（変更確認用）", class: "label" %>
-          <%= f.password_field :current_password, autocomplete: "current-password", class: "input input-bordered" %>
         </div>
 
         <div class="form-control mt-4">

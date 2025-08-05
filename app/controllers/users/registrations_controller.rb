@@ -5,6 +5,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :authenticate_user!
 
   def build_resource(hash = {})
     hash[:uid] = User.create_unique_string
@@ -20,8 +21,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
       # 2. 更新処理を実行
     if update_resource(resource, account_update_params)
-      flash[:notice] = "アカウントを更新しました"
-      redirect_to user_profile_path
+      flash[:notice] = "パスワード変更に成功しました。再度ログインしてください。"
+      redirect_to new_user_session_path, status: :see_other
     else
       flash.now[:error] = "アカウント更新に失敗しました"
       clean_up_passwords resource
