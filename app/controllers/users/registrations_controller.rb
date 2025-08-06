@@ -14,6 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def show
     @user = current_user
+    @user_masked_email = current_user.email.sub(/^(.{3}).*(@.*)$/, '\1*****\2')
   end
 
   def update
