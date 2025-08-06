@@ -5,17 +5,24 @@
 
       <div class="form-control mb-4">
         <label class="label text-sm text-gray-600">名前</label>
-        <p class="text-lg font-semibold"><%= current_user.name %></p>
+        <p class="text-lg font-semibold"><%= @user.name %></p>
       </div>
 
       <div class="form-control mb-4">
         <label class="label text-sm text-gray-600">メールアドレス</label>
-        <p class="text-lg font-semibold">*******</p>
+        <p class="text-lg font-semibold"><%= @user_masked_email %> </p>
       </div>
 
-      <div class="form-control mt-6">
-        <%= link_to "アカウント編集", edit_user_registration_path, class: "btn btn-warning w-full hover:bg-orange-400" %>
+      <div class="flex flex-row items-center justify-between mb-4">
+        <div class="flex flex-col form-control mb-4">
+          <label class="label text-sm text-gray-600">パスワード</label>
+          <p class="text-lg font-semibold"> ********* </p>
+        </div>
+        <div class="form-control mt-6">
+          <%= link_to "パスワード変更", edit_user_registration_path, class: "btn btn-warning w-full hover:bg-orange-400" %>
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -25,7 +32,7 @@
       <%= button_to "ログアウト", destroy_user_session_path,
           method: :delete,
           class: "btn btn-secondary btn-error w-full",
-          data: { confirm: "ログアウトしますか？", turbo_confirm: "ログアウトしますか？" } %>
+          data: { confirm: "ログアウトしますか？" } %>
     </div>
   </div>
   <%= render 'shared/your_page_footer_form' %>

@@ -2,26 +2,10 @@
   <div class="card w-full max-w-sm bg-orange-200 shadow-xl">
     <%= render 'shared/flash_message'%>
     <div class="card-body">
-      <h2 class="card-title justify-center">アカウント登録情報 編集</h2>
+      <h2 class="card-title justify-center">パスワード変更</h2>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-        <%= render "users/shared/error_messages", resource: resource %>
-
-        <div class="form-control mb-4">
-          <%= f.label :name, "名前", class: "label" %>
-          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "input input-bordered" %>
-        </div>
-
-        <div class="form-control mb-4">
-          <%= f.label :email, "メールアドレス", class: "label" %>
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "input input-bordered" %>
-        </div>
-
-        <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-          <div class="text-sm text-gray-600 mb-4">
-            現在確認中のメールアドレス: <%= resource.unconfirmed_email %>
-          </div>
-        <% end %>
+        <%= render "users/shared/error_messages", class: "pb-4 bg-lime-200", resource: resource %>
 
         <div class="form-control mb-4">
           <%= f.label :current_password, "現在のパスワード（変更確認用）", class: "label" %>
