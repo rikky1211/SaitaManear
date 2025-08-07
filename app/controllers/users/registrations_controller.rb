@@ -20,7 +20,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     self.resource = current_user
 
-      # 2. 更新処理を実行
+    # 2. 更新処理を実行
     if update_resource(resource, account_update_params)
       flash[:notice] = "パスワード変更に成功しました。再度ログインしてください。"
       redirect_to new_user_session_path, status: :see_other
@@ -35,7 +35,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # devise/ユーザ情報更新(edit/update)のページにて、userのアカウント名(name)を持って来れるように設定
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name])
+    devise_parameter_sanitizer.permit(:account_update, keys: [ :name ])
   end
 
   def update_resource(resource, params)

@@ -26,7 +26,7 @@ Devise.setup do |config|
   # with default "from" parameter.
 
   # 20250805:fix_メール送信者
-  config.mailer_sender = ENV['MAILER_SENDER']
+  config.mailer_sender = ENV["MAILER_SENDER"]
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'

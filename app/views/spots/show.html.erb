@@ -1,8 +1,4 @@
 <!-- app/views/spots/show.html.erb -->
-<div class="container mx-auto px-4">
-
-  <%= render 'shared/flash_message' %>
-
   <div class="page-move flex flex-row justify-between pt-4 pb-4 mx-auto">
     <%= link_to '＜ 探索に戻る', spots_path, class: 'back-link font-bold' %>
     <% if current_user %>
@@ -49,7 +45,6 @@
       </div>
     </div>
   </div>
-</div>
 
 <style>
   #map {
