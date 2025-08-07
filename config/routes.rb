@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get "sorry", to: "top#sorry"
   get "terms_of_use", to: "top#terms_of_use"
   get "privacy_policy", to:"top#privacy_policy"
+  get "contact_form", to:"top#contact_form"
 
   resources :spots, only: %i[index new create show] do
     collection do

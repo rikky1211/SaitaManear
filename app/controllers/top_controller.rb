@@ -14,6 +14,9 @@ class TopController < ApplicationController
   def privacy_policy
   end
 
+  def contact_form
+  end
+
   def sorry
   end
 end
