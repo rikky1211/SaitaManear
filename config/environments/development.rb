@@ -48,12 +48,12 @@ Rails.application.configure do
 
 
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com', # メール送信に使う SMTP サーバーのアドレス
-    port: 587, #SMTPのポート番号
-    domain: 'localhost', 
-    user_name: ENV['MAILER_SENDER'],
-    password: ENV['MAILER_PASSWORD'],
-    authentication: 'plain', # 認証方法。Gmailでは'plain' や 'login'を使用。
+    address: "smtp.gmail.com", # メール送信に使う SMTP サーバーのアドレス
+    port: 587, # SMTPのポート番号
+    domain: "localhost",
+    user_name: ENV["MAILER_SENDER"],
+    password: ENV["MAILER_PASSWORD"],
+    authentication: "plain", # 認証方法。Gmailでは'plain' や 'login'を使用。
     enable_starttls_auto: true # 暗号化通信を自動で有効にするかどうか。
   }
 

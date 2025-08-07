@@ -7,11 +7,11 @@ Rails.application.routes.draw do
     unlocks: "users/unlocks",
     omniauth_callbacks: "users/omniauth_callbacks"
   }
-  
+
   devise_scope :user do
-    get "/users/your_profile", to: "users/registrations#show", as: 'user_profile'
+    get "/users/your_profile", to: "users/registrations#show", as: "user_profile"
   end
-  
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   root "top#index"
   get "sorry", to: "top#sorry"
   get "terms_of_use", to: "top#terms_of_use"
-  get "privacy_policy", to:"top#privacy_policy"
-  get "contact_form", to:"top#contact_form"
+  get "privacy_policy", to: "top#privacy_policy"
+  get "contact_form", to: "top#contact_form"
 
   resources :spots, only: %i[index new create show] do
     collection do

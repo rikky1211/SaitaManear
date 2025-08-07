@@ -24,7 +24,7 @@ class YourProfilesController < ApplicationController
     else
       puts "#{@user.errors.full_messages.join(",")}"
       flash.now[:alert] = "プロフィールの更新に失敗しました"
-      render 'users/registrations/edit', status: :unprocessable_entity
+      render "users/registrations/edit", status: :unprocessable_entity
 
     end
   end

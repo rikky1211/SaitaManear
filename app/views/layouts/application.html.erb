@@ -29,7 +29,7 @@
     <% end %>
   </head>
 
-  <body class="flex flex-grow flex-col item-center bg-lime-100">
+  <body class="flex flex-grow flex-col bg-lime-100">
     <div class="fixed top-0 left-0 right-0 z-10 bg-green-500" >
       <% if signed_in? %>
         <%= render 'shared/common/header' %>
@@ -38,8 +38,11 @@
       <% end %>
     </div>
 
-    <div class="pt-24 pb-24 min-h-screen">
-          <%= yield %>
+    <div class="item-center pt-24 pb-24 min-h-screen">
+      <div class="container mx-auto">
+        <%= render 'shared/flash_message' %>
+      </div>
+      <%= yield %>
     </div>
 
     <div class="fixed bottom-0 bg-green-500 flex w-full items-center text-xs py-2 border-t border- border-green-800 z-10">
