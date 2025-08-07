@@ -21,7 +21,7 @@
             <li>OSが生成するID、端末の種類、端末識別子など、お客様が利用するOSや端末に関する情報</li>
             <li>当社ウェブサイトにおける滞在時間、入力履歴、購買履歴等の行動履歴</li>
             <li>当社アプリの起動時間、入力履歴等の利用履歴</li>
-            <li>お客様が当社サービス内で作成したコンテンツ（非公開タスク、メモ等を含む）</li>
+            <li>お客様が当社サービス内で作成したコンテンツ(登録したスポット等を含む)</li>
           </ul>
         </section>
 
@@ -82,7 +82,20 @@
 
         <section class="mb-8">
           <h2 class="text-2xl font-semibold mb-4 text-primary-focus flex items-center">
-            6. プライバシーポリシーの変更
+            6. Google APIサービスのユーザーデータポリシーについて
+          </h2>
+          <p class="mb-2">当社は、Google APIから受け取った情報の使用および他のアプリへの転送は、使用制限の要件を含め、Google API Services User Data Policyに準拠します。</p>
+          <p class="mb-2">Google APIサービスのユーザーデータに関するポリシーについて、詳しくは
+            <a href="https://developers.google.com/terms/api-services-user-data-policy?hl=ja" class="link link-primary">
+              こちら
+            </a>
+          をご参照ください。
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-semibold mb-4 text-primary-focus flex items-center">
+            7. プライバシーポリシーの変更
           </h2>
             <div>
               <span>当社は、必要に応じて本プライバシーポリシーを変更することがあります。その場合、変更後の施行時期および内容を、当社ウェブサイト等を通じて適切に通知または公表します。</span>
@@ -91,7 +104,7 @@
 
         <section class="mb-8">
           <h2 class="text-2xl font-semibold mb-4 text-primary-focus flex items-center">
-            7. お問い合わせ
+            8. お問い合わせ
           </h2>
           <p>お客様の情報の開示、訂正、利用停止、削除をご希望される場合は、
             <%= link_to "お問い合わせフォーム", contact_form_path, class: "text-blue-500 underline" %>
