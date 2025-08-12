@@ -1,6 +1,6 @@
 <!-- app/views/spots/show.html.erb -->
   <div class="page-move flex flex-row justify-between pt-4 pb-4 mx-auto">
-    <%= link_to '＜ 探索に戻る', spots_path, class: 'back-link font-bold' %>
+    <%= link_to '＜ 探索に戻る', spots_path(lat: @spot.latitude, lng: @spot.longitude), class: 'back-link font-bold' %>
     <% if current_user %>
       <div class="flex justify-end">
         <% if current_user.own?(@spot) %>

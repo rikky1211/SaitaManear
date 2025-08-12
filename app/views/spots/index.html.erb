@@ -3,7 +3,10 @@
 <script>
   function SearchMarker() {
     let map; // グローバルに定義
-    
+
+    let lat = <%= @lat.nil? ? 'null' : @lat %>
+    let lng = <%= @lng.nil? ? 'null' : @lng %>
+
     // 地図要素を取得
     const mapElement = document.getElementById('map');
 
@@ -11,10 +14,17 @@
     // ブラウザに位置情報の取得を依頼する関数です。成功すると、現在地の情報が position オブジェクトとして渡されます。
     navigator.geolocation.getCurrentPosition(function (position) {
       // 「LatLng: 地理座標（緯度と経度）」で表される地点の枠を作り「userLatLng」に入れる
-      const userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+      let userLatLng; // 現在位置
+      userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+      let lasttapSpot = null; // 前回確認したスポットの位置
+      if (lat !== null && lng !== null) {
+        lasttapSpot = new google.maps.LatLng(lat, lng);
+      }
 
       map = new google.maps.Map(mapElement, {
-        center: userLatLng,
+        center: lasttapSpot || userLatLng,
         zoom: 15
       });
 
@@ -30,7 +40,7 @@
       // 投稿されているマーカーを追加
       <% @spots.each do |spot| %>
         (
-          function(){
+          function() {
             const marker = new google.maps.Marker({
               position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>},
               map: map,
@@ -45,7 +55,8 @@
                       <%= j spot.name %><br>
                       <%= j spot.summary %><br>
                       <br>
-                      <a href="<%= h spot_path(spot) %>">詳細はこちら</a>
+                      <%= link_to "詳細はこちら", spot_path(spot), class: "text-blue-500 underline" %><br>
+                      <%= "※ネタバレ防止の為、画像表示は詳細のみにしています。" %>
                     `
             });
 
@@ -53,7 +64,6 @@
             marker.addListener('click', function() {
               infoWindow.open(map, marker);
             });
-
           }
         )();
       <% end %>
