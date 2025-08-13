@@ -3,6 +3,8 @@ class SpotsController < ApplicationController
 
   def index
     @spots = Spot.all
+    @lat = params[:lat]
+    @lng = params[:lng]
   end
 
   def show

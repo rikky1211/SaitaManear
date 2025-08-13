@@ -3,18 +3,44 @@
 <script>
   function SearchMarker() {
     let map; // グローバルに定義
-    
+
+    let lat = <%= @lat.nil? ? 'null' : @lat %>
+    let lng = <%= @lng.nil? ? 'null' : @lng %>
+
     // 地図要素を取得
     const mapElement = document.getElementById('map');
+    const omiyaStation = new google.maps.LatLng(35.9065, 139.6248);
 
     // 現在地を取得
     // ブラウザに位置情報の取得を依頼する関数です。成功すると、現在地の情報が position オブジェクトとして渡されます。
-    navigator.geolocation.getCurrentPosition(function (position) {
-      // 「LatLng: 地理座標（緯度と経度）」で表される地点の枠を作り「userLatLng」に入れる
-      const userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+    // navigator.geolocation.getCurrentPosition(
+    //    successCallback, // 成功時に呼ばれる関数
+    //    errorCallback,   // 失敗時に呼ばれる関数
+    //    options          // （任意）設定オプション
+    // );
+
+    // 「LatLng: 地理座標（緯度と経度）」で表される地点の枠を作り「userLatLng」に入れる
+
+    navigator.geolocation.getCurrentPosition(
+      function (position) { // 成功時
+        let userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        initMap(userLatLng);
+
+      }, function () { // 失敗時
+        let userLatLng = omiyaStation;
+        initMap(userLatLng);
+      }
+    );
+
+    function initMap(userLatLng) {
+      let lasttapSpot = null; // 前回確認したスポットの位置
+
+      if (lat !== null && lng !== null) {
+        lasttapSpot = new google.maps.LatLng(lat, lng);
+      }
 
       map = new google.maps.Map(mapElement, {
-        center: userLatLng,
+        center: lasttapSpot || userLatLng,
         zoom: 15
       });
 
@@ -29,35 +55,33 @@
 
       // 投稿されているマーカーを追加
       <% @spots.each do |spot| %>
-        (
-          function(){
-            const marker = new google.maps.Marker({
-              position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>},
-              map: map,
-              // j は Rails の escape_javascript ヘルパーの省略記法。JavaScript に埋め込む文字列を安全に変換（エスケープ）するために使用
-              title: '<%= j spot.name %>'
-            })
+        (function() {
+          const marker = new google.maps.Marker({
+            position: {lat: <%= spot.latitude %>, lng: <%= spot.longitude %>},
+            map: map,
+            // j は Rails の escape_javascript ヘルパーの省略記法。JavaScript に埋め込む文字列を安全に変換（エスケープ）するために使用
+            title: '<%= j spot.name %>'
+          });
 
-            // 吹き出しの追加
-            const infoWindow = new google.maps.InfoWindow({
-              content: 
-                    `
-                      <%= j spot.name %><br>
-                      <%= j spot.summary %><br>
-                      <br>
-                      <a href="<%= h spot_path(spot) %>">詳細はこちら</a>
-                    `
-            });
+          // 吹き出しの追加
+          const infoWindow = new google.maps.InfoWindow({
+            content: 
+              `
+              <%= j spot.name %><br>
+              <%= j spot.summary %><br>
+              <br>
+              <%= link_to "詳細はこちら", spot_path(spot), class: "text-blue-500 underline" %><br>
+              <%= "※ネタバレ防止の為、画像表示は詳細のみにしています。" %>
+              `
+          });
 
-            // マーカーにクリックイベントを追加
-            marker.addListener('click', function() {
-              infoWindow.open(map, marker);
-            });
-
-          }
-        )();
+          // マーカーにクリックイベントを追加
+          marker.addListener('click', function() {
+            infoWindow.open(map, marker);
+          });
+        })();
       <% end %>
-    });
+    };
   }
 </script>
 
