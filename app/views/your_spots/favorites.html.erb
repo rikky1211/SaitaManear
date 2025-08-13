@@ -5,41 +5,7 @@
     <!-- 全体の黄色背景ボックス -->
     <div class="bg-orange-200 rounded-lg border border-orange-700 p-4 space-y-6">
 
-      <% if @spots.present? %>
-        <% @spots.each do |spot| %>
-          <!-- 各投稿のカード -->
-          <div class="bg-white border-2 border-orange-400 rounded-md px-8 shadow flex items-center justify-between">
-
-            <!-- 左：スポット情報 -->
-            <div class="text-sm space-y-1">
-              <p class="font-bold">スポット名：</p>
-              <p class="font-bold"><%= spot.name %></p>
-              <p class="font-bold">市区町村：</p>
-              <p class="font-bold"><%= spot.address.presence || "XXXXXXXXX" %></p>
-              <%= link_to "スポット詳細へ", spot_path(spot), class: "font-bold text-blue-500 underline" %>
-            </div>
-
-            <!-- 中央：画像 -->
-            <div class="w-30 h-30 bg-gray-300 mx-4 flex items-center justify-center overflow-hidden rounded">
-              <% if spot.spot_image.attached? %>
-                <%= image_tag url_for(spot.spot_image), class: "w-full h-full object-cover" %>
-              <% else %>
-                <span class="text-gray-600 text-sm">画像</span>
-              <% end %>
-            </div>
-
-            <!-- 右：ボタン -->
-            <div class="flex flex-col space-y-2">
-              <%= render 'shared/favorites/favorite_button', { spot: spot } %>
-            </div>
-          </div>
-        <% end %>
-        <div class >
-          <%= paginate @spots %>
-        </div>
-      <% else %>
-        <p>登録したスポットはありません。</p>
-      <% end %>
+      <%= render partial: 'spot_info', locals: { mode: "favorites" } %>
 
     </div>
   </div>
