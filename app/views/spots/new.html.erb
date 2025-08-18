@@ -1,69 +1,90 @@
+<div class=" max-w-5xl mx-auto">
 
-  <div class=" max-w-5xl mx-auto">
-
-    <div class="spot-card bg-orange-200 rounded-lg border border-orange-700 p-4 space-y-6">
-      <h1 class="text-2xl font-bold mb-6">スポット投稿</h1>
-      <%= render 'shared/spot_form', spot: @spot %>
-    </div>
+  <!-- オレンジ色のカード風ボックス -->
+  <div class="spot-card bg-orange-200 rounded-lg border border-orange-700 p-4 space-y-6">
+    <h1 class="text-2xl font-bold mb-6">スポット投稿</h1>
+    <!-- 部分テンプレートを呼び出してフォームを表示 -->
+    <%= render 'shared/spot_form', spot: @spot %>
   </div>
+</div>
 
-<!-- Google Maps Script -->
+<!-- Google MapsのJavaScriptを読み込む部分 -->
+<!--
+  key= には自分のGoogle Maps APIキーを入れる
+  callback= で指定した関数が、自動的に地図を表示するとき呼ばれる
+-->
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=NewMacker&language=ja">
 </script>
 
 <script>
-  // 名前空間を作成（他と衝突しないように）
+  // -------------------------------------------------------
+  // 名前空間を作成（windowにMapArgumentを用意して他と衝突しないようにする）
+  // もし既にあればそれを使い、なければ新しく作る
+  // -------------------------------------------------------
   window.MapArgument = window.MapArgument || {};
 
-  // 地図とマーカーをグローバルに保持
+  // 地図オブジェクトとマーカーをグローバルに保持する
   MapArgument.map = null;
   MapArgument.marker = null;
 
+  // -------------------------------------------------------
   // Google Maps API のコールバック関数
-  // ページが読み込まれたらこの関数が自動的に実行される
+  // ページが読み込まれたら自動的に実行される
+  // -------------------------------------------------------
   window.NewMacker = function() {
 
+    // デフォルトの位置（東京駅の緯度・経度）
     const default_LatLng = { lat: 35.681236, lng: 139.767125 };
+
+    // 地図を表示するためのHTML要素（id="map" のdiv）を取得
     const mapElement = document.getElementById('map');
 
-    // デフォルトの位置を東京駅に設定(位置共有を拒否した場合)
+    // デフォルト位置を東京駅にして地図を作成
     map = new google.maps.Map(mapElement,{
       center: default_LatLng,
       zoom: 15,
     });
 
-    // 現在地を取得 
+    // -------------------------------------------------------
+    // 現在地を取得
+    // 成功したら position.coords.latitude / longitude が取れる
+    // -------------------------------------------------------
     navigator.geolocation.getCurrentPosition(function (position) {
       const userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-      // mapを２回読み込んでしまっていたのでコード書き換え。
+      // 地図の中心を現在地に移動
       map.setCenter(userLatLng);
-      // map = new google.maps.Map(mapElement, {
-        // center: userLatLng,
-        // zoom: 15
-      // });
 
+      // 住所検索のためのジオコーダーを作成
       const geocoder = new google.maps.Geocoder();
+
+      // 検索ボックスを作って地図の左上に追加
       const input = document.createElement("input");
       input.placeholder = "住所検索";
       input.type = "text";
       input.className = "border p-2 rounded-md shadow mb-2 w-64";
       map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
+      // 入力が変わったらジオコーディング（住所から座標に変換）を実行
       input.addEventListener("change", () => {
         geocodeAddress(geocoder, map, input.value);
       });
 
+      // 地図をクリックしたらクリック位置にマーカーを置く
       map.addListener("click", (e) => {
         placeMarker(e.latLng);
       });
     });
   }
 
+  // -------------------------------------------------------
+  // 入力された住所を座標に変換してマーカーを置く
+  // -------------------------------------------------------
   function geocodeAddress(geocoder, map, address) {
     geocoder.geocode({ address: address }, (results, status) => {
       if (status === "OK") {
+        // 住所が見つかったら地図の中心をその場所に移動
         map.setCenter(results[0].geometry.location);
         placeMarker(results[0].geometry.location);
       } else {
@@ -72,18 +93,29 @@
     });
   }
 
+  // -------------------------------------------------------
+  // マーカーを置く関数
+  // 既にマーカーがあれば消して新しい場所に置き直す
+  // マーカーの座標をフォームの hidden input に書き込む
+  // -------------------------------------------------------
   function placeMarker(location) {
+    // 古いマーカーを消す
     if (MapArgument.marker) MapArgument.marker.setMap(null);
+
+    // 新しいマーカーを追加
     MapArgument.marker = new google.maps.Marker({
       position: location,
       map: map,
     });
+
+    // 緯度・経度をフォームのhiddenフィールドに反映させる
     document.getElementById("latitude").value = location.lat();
     document.getElementById("longitude").value = location.lng();
   }
 </script>
 
 <style>
+  /* 地図の高さを画面の半分にする */
   #map {
     height: 50vh;
   }
