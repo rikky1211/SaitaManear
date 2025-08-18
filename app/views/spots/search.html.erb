@@ -1,4 +1,4 @@
-<!-- ✅ ローディング画面 -->
+<!-- ローディング画面 -->
 <div id="loading-overlay" class="fixed inset-0 flex flex-col items-center justify-center bg-lime-100 z-0">
   <%= image_tag 'now_loading.png', alt: "読み込み中", class: "w-80 h-80" %>
   <p class="text-xl pt-2">近くのスポット確認中…</p>
@@ -105,7 +105,7 @@
         });
       });
 
-      // ✅ ローディング画像を非表示にする
+      // ローディング画像を非表示にする
       document.getElementById("loading-overlay").style.display = "none";
 
     }, function () {
@@ -115,12 +115,12 @@
   }
 </script>
 
-<!-- ✅ Google Maps API（callback=NearMarker） -->
+<!-- Google Maps API（callback=NearMarker） -->
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=NearMarker&language=ja">
 </script>
 
-<!-- ✅ スタイル -->
+<!-- スタイル -->
 <style>
   #map {
     position: relative;
