@@ -1,0 +1,2 @@
+module SuperAdmin::ManagerSessionsHelper
+end
