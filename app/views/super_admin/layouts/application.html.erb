@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>SuperAdmin</title>
+    <title>SaitaManear_SuperAdmin</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= yield :head %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
-  <body>
-    <%= render "super_admin/shared/header" %>
-    <%= render "super_admin/shared/sidebar" %>
-    <%= yield %>
-    <%= render "super_admin/shared/footer" %>
+
+  <body class="text-black">
+    <div class="bg-blue-500">
+      <%= render 'super_admin/shared/header' %>
+    </div>
+    <div class="flex bg-white">
+      <aside class="w-64 min-h-screen">
+        <%= render 'super_admin/shared/sidebar' %>
+      </aside>
+    </div>
+    <main class="flex-1 px-6 py-4">
+      <%= yield %>
+    </main>
   </body>
 </html>

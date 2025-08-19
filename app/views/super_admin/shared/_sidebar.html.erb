@@ -1,18 +1,13 @@
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
-  <div class="position-sticky pt-3 sidebar-sticky">
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <%= link_to '#' do %>
-          <i class="bi bi-file-earmark"></i>
-          <%= "user" %>
-        <% end %>
-      </li>
-      <li class="nav-item">
-        <%= link_to '#' do %>
-          <i class="bi bi-person"></i>
-          <%= "posts" %>
-        <% end %>
-      </li>
-    </ul>
-  </div>
-</nav>
+<ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+  <li>
+    <%= link_to '#' do %>
+      <%= "user 👤" %>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to '#' do %>
+      <%= "posts 💬" %>
+    <% end %>
+  </li>
+</ul>
+
