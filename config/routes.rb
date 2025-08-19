@@ -46,8 +46,8 @@ Rails.application.routes.draw do
     root "managements#index"
     resources :users, only: %i[index show edit update destroy]
     resources :posts, only: %i[index show edit update destroy]
-    get 'login' => 'user_login#new', :as => :login
-    post 'login' => "user_login#create"
-    delete 'logout' => 'user_login#destroy', :as => :logout
+    get 'login' => 'sadmin_login#new', :as => :login
+    post 'login' => "sadmin_login#create"
+    delete 'logout' => 'sadmin_login#destroy', :as => :logout
   end
 end
