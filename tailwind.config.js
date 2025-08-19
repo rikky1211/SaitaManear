@@ -12,7 +12,9 @@ module.exports = {
 
   safelist: [
     "btn",
-    { pattern: /btn-(neutral|primary|secondary|accent|info|success|warning|error)/ },
-    { pattern: /bg-(red|blue|green|yellow|pink|lime)-([1-9]00)/ },
+    { pattern: /btn-(?:neutral|primary|secondary|accent|info|success|warning|error)/ },
+    { pattern: /bg-(?:red|blue|green|yellow|pink|lime)-(?:[1-9]00)/ },
+    { pattern: /(?:p|m)(?:x|y)?-(?:[1-9]|1[1-9]|20)/},
+    { pattern: /[wh]-(?:[0-9]|[1-9][0-9]|[1-9][0-9]?)/ },
   ],
 }
