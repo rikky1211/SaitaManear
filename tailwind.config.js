@@ -9,4 +9,10 @@ module.exports = {
   plugins: [require("daisyui")],
   daisyui: {
   },
+
+  safelist: [
+    "btn",
+    { pattern: /btn-(neutral|primary|secondary|accent|info|success|warning|error)/ },
+    { pattern: /bg-(red|blue|green|yellow|pink|lime)-([1-9]00)/ },
+  ],
 }

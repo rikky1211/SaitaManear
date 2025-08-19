@@ -13,7 +13,7 @@ class SpotsController < ApplicationController
 
   def new
     @spot = Spot.new
-    @season_tags = SeasonTag.all.map(&:season)
+    @season_tags = SeasonTag.all
   end
 
   def create
