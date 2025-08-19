@@ -18,6 +18,9 @@ class SuperAdmin::UsersController < SuperAdmin::BaseController
   end
 
   def destroy
+    user = User.find(params[:id])
+    user.destroy!
+    redirect_to super_admin_users_path, notice: "ユーザを削除しました"
   end 
 
 end
