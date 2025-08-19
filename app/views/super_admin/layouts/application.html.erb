@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SuperAdmin</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+  </head>
+  <body>
+    <%= render "super_admin/shared/header" %>
+    <%= render "super_admin/shared/sidebar" %>
+    <%= yield %>
+    <%= render "super_admin/shared/footer" %>
+  </body>
+</html>

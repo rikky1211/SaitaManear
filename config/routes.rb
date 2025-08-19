@@ -41,4 +41,13 @@ Rails.application.routes.draw do
       get :favorites
     end
   end
+
+  namespace :super_admin do
+    root "managements#index"
+    resources :users, only: %i[index show edit update destroy]
+    resources :posts, only: %i[index show edit update destroy]
+    get 'login' => 'user_login#new', :as => :login
+    post 'login' => "user_login#create"
+    delete 'logout' => 'user_login#destroy', :as => :logout
+  end
 end
