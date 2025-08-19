@@ -19,7 +19,7 @@
                       accept: Spot::ACCEPTED_CONTENT_TYPES.join(",") %>
 
     <small class="form-text text-white-50">
-      ※ JPEG、PNG、WebP、HEIC形式（5MB以下）のみアップロード可能です
+      ※ JPEG、PNG、WebP、HEIC形式（10MB以下）のみアップロード可能です
     </small>
   </div>
 
@@ -27,8 +27,8 @@
   <div>
     <p class="font-medium text-gray-700 mb-2">タグ選択（未実装）</p>
     <div class="flex gap-2 flex-wrap">
-      <% ["春", "夏", "秋", "冬", "通年", "期間限定"].each do |tag| %>
-        <span class="px-4 py-1 bg-gray-200 rounded-full text-gray-600 cursor-not-allowed"><%= tag %></span>
+      <% season_tags.each do |tag| %>
+        <span class="btn btn-warning"><%= tag.season %></span>
       <% end %>
     </div>
   </div>
