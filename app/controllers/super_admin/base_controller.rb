@@ -1,6 +1,6 @@
 class SuperAdmin::BaseController < ApplicationController
   before_action :authorized_only
-  layout 'super_admin/layouts/application'
+  layout "super_admin/layouts/application"
 
   private
 
