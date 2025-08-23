@@ -1,6 +1,6 @@
-class SuperAdmin::SpotsController < ApplicationController
+class SuperAdmin::SpotsController < SuperAdmin::BaseController
   def index
-    @posts = Post.all
+    @spots = Spot.all
   end
 
   def show

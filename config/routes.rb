@@ -45,6 +45,6 @@ Rails.application.routes.draw do
   namespace :super_admin do
     root "managements#index"
     resources :users, only: %i[index show edit update destroy]
-    resources :posts, only: %i[index show edit update destroy]
+    resources :spots, only: %i[index show edit update destroy]
   end
 end
