@@ -4,6 +4,7 @@ class SuperAdmin::SpotsController < SuperAdmin::BaseController
   end
 
   def show
+    @spot = Spot.find(params[:id])
   end
 
   def edit
@@ -17,4 +18,5 @@ class SuperAdmin::SpotsController < SuperAdmin::BaseController
 
   def destroy
   end
+
 end
