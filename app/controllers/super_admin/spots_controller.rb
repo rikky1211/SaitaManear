@@ -8,12 +8,13 @@ class SuperAdmin::SpotsController < SuperAdmin::BaseController
   end
 
   def edit
-  end
-
-  def new
+    @spot = Spot.find(params[:id])
   end
 
   def update
+  end
+
+  def new
   end
 
   def destroy
