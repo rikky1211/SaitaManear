@@ -1,1 +1,40 @@
-index/spots
+<% if @spots.present? %>
+  <div class="overflow-x-auto">
+    <table class="min-w-full border border-lime-400 text-sm text-left">
+      <thead class="bg-lime-200">
+        <tr>
+          <th class="px-4 py-2 border-b border-lime-400 text-center">作成ユーザーID</th>
+          <th class="px-4 py-2 border-b border-lime-400 text-center">スポットID</th>
+          <th class="px-4 py-2 border-b border-lime-400 text-center">スポット名</th>
+          <th class="px-4 py-2 border-b border-lime-400 text-center">住所</th>
+          <th class="px-4 py-2 border-b border-lime-400 text-center">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @spots.each do |spot| %>
+          <tr class="hover:bg-lime-50">
+            <td class="px-4 py-2 border-b border-lime-200"><%= spot.user_id %></td>
+            <td class="px-4 py-2 border-b border-lime-200"><%= spot.id %></td>
+            <td class="px-4 py-2 border-b border-lime-200"><%= spot.name %></td>
+            <td class="px-4 py-2 border-b border-lime-200"><%= spot.address %></td>
+            <td class="px-4 py-2 border-b border-lime-200 text-center">
+              <div class="flex items-center justify-center space-x-2">
+                <%# 編集ボタン %>
+                <%= link_to "編集", edit_super_admin_spot_path(spot),
+                      class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs" %>
+
+                <%# 削除ボタン %>
+                <%= button_to "削除", super_admin_spot_path(spot),
+                      method: :delete,
+                      data: { turbo: false, confirm: "本当に削除しますか？" },
+                      class: "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs" %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <p>登録ユーザーはいません。</p>
+<% end %>
