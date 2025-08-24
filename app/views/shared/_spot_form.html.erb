@@ -1,57 +1,51 @@
-<%= form_with(model: @spot, local: true, url: form_url, html: { multipart: true, class: "space-y-6" }) do |f| %>
-  <!-- マーカー名称 -->
-  <div>
-    <%= f.label :name, class: "block font-medium text-gray-700 font-bold mb-1" do %>
-      マーカー名称
-      <span class="text-red-400 text-sm font-bold ml-2"> *必須</span>
+    <%= form_with(model: @spot, local: true, url: form_url, html: { multipart: true, class: "space-y-6" }) do |f| %>
+      <!-- マーカー名称 -->
+      <div>
+        <%= f.label :name, class: "block font-medium text-gray-700 font-bold mb-1" do %>
+          マーカー名称
+          <span class="text-red-400 text-sm font-bold ml-2"> *必須</span>
+        <% end %>
+        <%= f.text_field :name, class: "w-full border border-gray-300 rounded-md p-2 bg-white" %>
+      </div>
+
+      <!-- 画像アップロード -->
+      <div>
+        <%= f.label :spot_image, class: "block font-medium text-gray-700 mb-1" do %>
+          画像
+          <span class="text-red-400 text-sm font-bold ml-2"> *必須</span>
+        <% end %>
+        <%= f.file_field :spot_image, class: "w-full bg-white" %>
+      </div>
+
+      <!-- タグ選択 -->
+      <div>
+        <p class="font-medium text-gray-700 mb-2">タグ選択（未実装）</p>
+        <div class="flex gap-2 flex-wrap">
+          <% ["春", "夏", "秋", "冬", "通年", "期間限定"].each do |tag| %>
+            <span class="px-4 py-1 bg-gray-200 rounded-full text-gray-600 cursor-not-allowed"><%= tag %></span>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- 概要 -->
+      <div>
+        <%= f.label :summary, "概要", class: "block font-medium text-gray-700 mb-1" %>
+        <%= f.text_area :summary, class: "w-full border border-gray-300 rounded-md p-2 bg-white", rows: 5 %>
+      </div>
+
+      <!-- Google Map -->
+      <div>
+        <p class="font-medium text-gray-700 mb-2">
+          地図からスポット位置を選択
+          <p class="text-red-400 text-sm font-bold ml-2"> *必須(埼玉県限定で登録可能)</p>
+        </p>
+        <div id="map" class="w-full h-64 border rounded-md mb-2"></div>
+        <%= f.hidden_field :latitude, id: "latitude" %>
+        <%= f.hidden_field :longitude, id: "longitude" %>
+      </div>
+
+      <!-- 投稿ボタン -->
+      <div>
+        <%= f.submit "投稿", class: "bg-green-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-green-700" %>
+      </div>
     <% end %>
-    <%= f.text_field :name, class: "w-full border border-gray-300 rounded-md p-2 bg-white" %>
-  </div>
-
-  <!-- 画像アップロード -->
-  <div>
-    <%= f.label :spot_image, class: "block font-medium text-gray-700 mb-1" do %>
-      画像
-      <span class="text-red-400 text-sm font-bold ml-2"> *必須</span>
-    <% end %>
-    <%= f.file_field :spot_image, 
-                      class: "w-full bg-white",
-                      accept: Spot::ACCEPTED_CONTENT_TYPES.join(",") %>
-
-    <small class="form-text text-white-50">
-      ※ JPEG、PNG、WebP、HEIC形式（10MB以下）のみアップロード可能です
-    </small>
-  </div>
-
-  <!-- タグ選択 -->
-  <div>
-    <p class="font-medium text-gray-700 mb-2">タグ選択（未実装）</p>
-    <div class="flex gap-2 flex-wrap">
-      <% season_tags.each do |tag| %>
-        <span class="btn btn-warning"><%= tag.season %></span>
-      <% end %>
-    </div>
-  </div>
-
-  <!-- 概要 -->
-  <div>
-    <%= f.label :summary, "概要", class: "block font-medium text-gray-700 mb-1" %>
-    <%= f.text_area :summary, class: "w-full border border-gray-300 rounded-md p-2 bg-white", rows: 5 %>
-  </div>
-
-  <!-- Google Map -->
-  <div>
-    <p class="font-medium text-gray-700 mb-2">
-      地図からスポット位置を選択
-      <p class="text-red-400 text-sm font-bold ml-2"> *必須(埼玉県限定で登録可能)</p>
-    </p>
-    <div id="map" class="w-full h-64 border rounded-md mb-2"></div>
-    <%= f.hidden_field :latitude, id: "latitude" %>
-    <%= f.hidden_field :longitude, id: "longitude" %>
-  </div>
-
-  <!-- 投稿ボタン -->
-  <div>
-    <%= f.submit "投稿", class: "bg-green-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-green-700" %>
-  </div>
-<% end %>
