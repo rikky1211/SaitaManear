@@ -14,30 +14,23 @@
   // 名前空間を作成（他と衝突しないように）
   window.MapArgument = window.MapArgument || {};
 
-  // 地図とマーカーをグローバルに保持
-  MapArgument.map = null;
-  MapArgument.marker = null;
-
   // Google Maps API のコールバック関数
   // ページが読み込まれたらこの関数が自動的に実行される
   window.EditMacker = function() {
     // map と marker を後で使うために定義（letで再代入可能に）
-
-
     const mapElement = document.getElementById('map');
-
     const latLng = { lat: <%= @spot.latitude %>, lng: <%= @spot.longitude %> };
 
     // Google Map を表示（地図の初期設定）
-    map = new google.maps.Map(mapElement, {
+    MapArgument.map = new google.maps.Map(mapElement, {
       zoom: 16,         // 拡大レベル
       center: latLng,   // 地図の中心位置
     });
 
     // 初期マーカーを表示（すでに登録されている位置）
-    marker = new google.maps.Marker({
+    MapArgument.marker = new google.maps.Marker({
       position: latLng,
-      map: map,
+      map: MapArgument.map,
       title: "<%= j @spot.name %>"
     });
 
@@ -51,15 +44,15 @@
     input.className = "border p-2 rounded-md shadow mb-2 w-64"; // CSSスタイル
 
     // 地図の左上にこの入力ボックスを追加
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    MapArgument.map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
     // 入力ボックスで住所が入力されたとき、Geocode（住所→緯度経度に変換）を実行
     input.addEventListener("change", () => {
-      geocodeAddress(geocoder, map, input.value);
+      geocodeAddress(geocoder, MapArgument.map, input.value);
     });
 
     // 地図をクリックしたときのイベント：クリック位置にマーカーを移動
-    map.addListener("click", (e) => {
+    MapArgument.map.addListener("click", (e) => {
       placeMarker(e.latLng);
     });
   }
@@ -67,12 +60,12 @@
   // マーカーを表示し、緯度・経度のフォームに値を反映する関数
   function placeMarker(location) {
     // すでにマーカーがある場合は削除
-    if (marker) {marker.setMap(null);}
+    if (MapArgument.marker) {MapArgument.marker.setMap(null);}
 
     // 新しい位置にマーカーを作成
-    marker = new google.maps.Marker({
+    MapArgument.marker = new google.maps.Marker({
       position: location,
-      map: map,
+      map: MapArgument.map,
     });
 
     // 緯度・経度をフォームの hiddenフィールドなどに代入（DBに保存できるように）

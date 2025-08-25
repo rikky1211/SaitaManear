@@ -7,6 +7,8 @@ class ApplicationController < ActionController::Base
   def form_url
     if controller_path == "your_spots"
       your_spot_path(@spot)
+    elsif controller_path == "super_admin/spots"
+      @spot.new_record? ? super_admin_posts_path : super_admin_spot_path(@spot)
     else
       spots_path
     end
