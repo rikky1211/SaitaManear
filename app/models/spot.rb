@@ -1,4 +1,5 @@
 class Spot < ApplicationRecord
+  before_save :clean_address
   # geocoded_by :address
   # after_validation :geocode
 
@@ -36,17 +37,19 @@ class Spot < ApplicationRecord
   end
 
   def must_be_in_saitama
-    results = Geocoder.search([ latitude, longitude ])
-    Rails.logger.debug "Geocoder results: #{results.map(&:data)}"
-    unless in_saitama_prefecture?(results)
+    results = Geocoder.search([ latitude, longitude ]).first.formatted_address
+    # binding.pry
+    Rails.logger.debug "-----------------------------------"
+    Rails.logger.debug "Geocoder results: #{results}"
+    Rails.logger.debug "-----------------------------------"
+    
+    unless results.include?("埼玉県")
       errors.add(:base, "埼玉県以外の場所は登録できません。")
     end
   end
 
-  def in_saitama_prefecture?(geocoder_results)
-    return false if geocoder_results.blank?
-
-    geocoder_str = geocoder_results.map { |result| result.data["formatted_address"] }.join
-    geocoder_str.include?("埼玉県")
+  # 保存する前に「日本、」と「〒123-4567 」を削除する
+  def clean_address
+    self.address = address.gsub(/\A日本、〒\d{3}-\d{4}\s*/, '')
   end
 end

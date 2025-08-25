@@ -9,7 +9,7 @@
         <p class="font-bold">スポット名：</p>
         <p class="font-bold"><%= spot.name %></p>
           <p class="font-bold">市区町村：</p>
-          <p class="font-bold"><%= spot.address&.sub(/\A日本、?〒?\d{3}-\d{4}\s/, "") || "住所が取得できませんでした" %></p>
+          <p class="font-bold"><%= spot.address || "住所が取得できませんでした" %></p>
         <% if mode == "favorites" %>
           <%= link_to "スポット詳細へ", spot_path(spot), class: "font-bold text-blue-500 underline" %>
         <% end %>
