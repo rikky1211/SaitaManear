@@ -1,1 +1,72 @@
-super_admin/servise_tag/index
+
+
+<div class="overflow-x-auto">
+  <table class="min-w-full border border-blue-400 text-sm text-left">
+    <thead class="bg-blue-200">
+      <tr>
+        <th class="px-4 py-2 border-b border-blue-400 text-center">ID</th>
+        <th class="px-4 py-2 border-b border-blue-400 text-center">タグ名</th>
+        <th class="px-4 py-2 border-b border-blue-400 text-center">CSSスタイルID</th>
+        <th class="px-4 py-2 border-b border-blue-400 text-center">CSSスタイル名</th>
+        <th class="px-4 py-2 border-b border-blue-400 text-center">CSSスタイル</th>
+        <th class="px-4 py-2 border-b border-blue-400 text-center">操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= form_with(model: ServiceTag.new, local: true, url: super_admin_service_tags_path, html: { multipart: true, class: "space-y-6", data: { turbo: false }}) do |f| %>
+        <tr>
+          <td class="px-4 py-2 border-b border-blue-200 text-center">追加用</td>
+
+          <td class="px-4 py-2 border-b border-blue-200 text-center">
+            <%= f.text_field :name, class: "w-full border border-gray-100 rounded-md p-2 bg-white" %>
+          </td>
+
+          <td class="px-4 py-2 border-b border-blue-200 text-center">-</td>
+          
+          <td class="px-4 py-2 border-b border-blue-200 text-center">
+            <%= f.collection_select :css_style_id, CssStyle.all, :id, :style_name,
+                { prompt: "スタイルを選択してください" },
+                  class: "w-full border border-gray-300 rounded-md p-2 bg-white" %>
+          </td>
+
+          <td class="px-4 py-2 border-b border-blue-200 text-center">-</td>
+
+          <td class="px-4 py-2 border-b border-blue-200 text-center">
+            <%= f.submit "追加", class: "bg-green-600 text-white font-semibold px-4 py-2 rounded-md hover:bg-green-700" %>
+          </td>
+        </tr>
+
+      <% end %>
+
+      <% if @service_tags.present? %>
+          <% @service_tags.each do |service_tag| %>
+            <tr class="hover:bg-blue-50">
+              <td class="px-4 py-2 border-b border-blue-200"><%= service_tag.id %></td>
+              <td class="px-4 py-2 border-b border-blue-200"><%= service_tag.name %></td>
+              <td class="px-4 py-2 border-b border-blue-200"><%= service_tag.css_style.id %></td>
+              <td class="px-4 py-2 border-b border-blue-200"><%= service_tag.css_style.style_name %></td>
+              <td class="px-4 py-2 border-b border-blue-200"><%= service_tag.css_style.style_daisyui %></td>
+              <td class="px-4 py-2 border-b border-blue-200 text-center">
+                <div class="flex items-center justify-center space-x-2">
+                  <%# 編集ボタン %>
+                  <%= link_to "編集", edit_super_admin_service_tag_path(service_tag),
+                        class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs" %>
+
+                  <%# 削除ボタン %>
+                  <%= button_to "削除", super_admin_service_tag_path(service_tag),
+                        method: :delete,
+                        data: { turbo: false, confirm: "本当に削除しますか？" },
+                        class: "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+
+      <% else %>
+        <p>登録しているタグはありません</p>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
