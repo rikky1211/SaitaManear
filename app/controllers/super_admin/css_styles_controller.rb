@@ -37,7 +37,7 @@ class SuperAdmin::CssStylesController < SuperAdmin::BaseController
   private
   
   def css_style_params
-    params.require(:css_style).permit(:style_name, :style_color, :style_daisyui,)
+    params.require(:css_style).permit(:style_name, :style_color, :style_daisyui)
   end
 
 end
