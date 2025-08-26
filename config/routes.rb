@@ -46,5 +46,6 @@ Rails.application.routes.draw do
     root "managements#index"
     resources :users, only: %i[index show edit update destroy]
     resources :spots, only: %i[index show edit update destroy]
+    resources :service_tags, only: %i[index new create edit update destroy]
   end
 end

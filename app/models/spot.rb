@@ -25,7 +25,9 @@ class Spot < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   belongs_to :user
+  belongs_to :service_tag
   # belongs_to :town
+  
   has_one_attached :spot_image
 
   def latlng_uniq
