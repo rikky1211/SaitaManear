@@ -1,3 +1,5 @@
+<h1 class="text-3xl text-bold">Users</h1>
+
 <%= form_with(model: @user, local: true, url: super_admin_user_path, html: { multipart: true, class: "space-y-6" }, data: { turbo: false }) do |f| %>
   <div>
     <%= f.label :id, class: "block font-medium text-gray-700 font-bold mb-1" do %>
