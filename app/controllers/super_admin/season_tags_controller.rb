@@ -35,9 +35,8 @@ class SuperAdmin::SeasonTagsController < SuperAdmin::BaseController
   end
 
   private
-  
+
   def season_tag_params
     params.require(:season_tag).permit(:season, :css_style_id)
   end
-
 end

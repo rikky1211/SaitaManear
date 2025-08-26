@@ -27,7 +27,7 @@ class Spot < ApplicationRecord
   belongs_to :user
   belongs_to :service_tag
   # belongs_to :town
-  
+
   has_one_attached :spot_image
 
   def latlng_uniq
@@ -44,7 +44,7 @@ class Spot < ApplicationRecord
     Rails.logger.debug "-----------------------------------"
     Rails.logger.debug "Geocoder results: #{results}"
     Rails.logger.debug "-----------------------------------"
-    
+
     unless results.include?("埼玉県")
       errors.add(:base, "埼玉県以外の場所は登録できません。")
     end
@@ -52,6 +52,6 @@ class Spot < ApplicationRecord
 
   # 保存する前に「日本、」と「〒123-4567 」を削除する
   def clean_address
-    self.address = address.gsub(/\A日本、〒\d{3}-\d{4}\s*/, '')
+    self.address = address.gsub(/\A日本、〒\d{3}-\d{4}\s*/, "")
   end
 end

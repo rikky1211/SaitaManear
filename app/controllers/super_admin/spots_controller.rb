@@ -29,5 +29,4 @@ class SuperAdmin::SpotsController < SuperAdmin::BaseController
   def spot_params
     params.require(:spot).permit(:name, :spot_image, :summary, :latitude, :longitude)
   end
-
 end

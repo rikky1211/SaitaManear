@@ -35,9 +35,8 @@ class SuperAdmin::ServiceTagsController < SuperAdmin::BaseController
   end
 
   private
-  
+
   def service_tag_params
     params.require(:service_tag).permit(:name, :css_style_id)
   end
-
 end
