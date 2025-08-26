@@ -1,18 +1,18 @@
-<h1 class="text-3xl text-bold">Service_Tag</h1>
+<h1 class="text-3xl text-bold">Season_Tag</h1>
 
-<%= form_with(model: @service_tag, local: true, url: super_admin_service_tag_path(@service_tag), html: { multipart: true, class: "space-y-6" }, data: { turbo: false }) do |f| %>
+<%= form_with(model: @season_tag, local: true, url: super_admin_season_tag_path(@season_tag), html: { multipart: true, class: "space-y-6" }, data: { turbo: false }) do |f| %>
   <div>
     <%= f.label :id, class: "block font-medium text-gray-700 font-bold mb-1" do %>
-      タブID : <%= @service_tag.id %>
+      タブID : <%= @season_tag.id %>
     <% end %>
   </div>
 
   <div>
-    <%= f.label :name, class: "block font-medium text-gray-700 font-bold mb-1" do %>
+    <%= f.label :season, class: "block font-medium text-gray-700 font-bold mb-1" do %>
       タブ名
       <span class="text-red-400 text-sm font-bold ml-2"> *必須</span>
     <% end %>
-    <%= f.text_field :name, class: "w-full border border-gray-300 rounded-md p-2 bg-white" %>
+    <%= f.text_field :season, class: "w-full border border-gray-300 rounded-md p-2 bg-white" %>
   </div>
 
   <div>
@@ -21,7 +21,7 @@
     <% end %>
     <td class="px-4 py-2 border-b border-blue-200 text-center">
       <%= f.collection_select :css_style_id, CssStyle.all, :id, :style_name,
-          { prompt: @service_tag.css_style.style_name },
+          { prompt: @season_tag.css_style.style_name },
             class: "w-full border border-gray-300 rounded-md p-2 bg-white" %>
     </td>
   </div>
