@@ -1,5 +1,4 @@
 class SuperAdmin::UsersController < SuperAdmin::BaseController
-  before_action :authenticate_user!, only: %i[index show edit update destroy]
   def index
     @users = User.all
   end
