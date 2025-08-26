@@ -1,4 +1,4 @@
-<h1 class="text-3xl text-bold">Service_Tag</h1>
+<h1 class="text-3xl text-bold">Season_Tag</h1>
 
 <div class="overflow-x-auto">
   <table class="min-w-full border border-blue-400 text-sm text-left">
@@ -14,12 +14,12 @@
     </thead>
 
     <tbody>
-      <%= form_with(model: ServiceTag.new, local: true, url: super_admin_service_tags_path, html: { multipart: true, class: "space-y-6", data: { turbo: false }}) do |f| %>
+      <%= form_with(model: SeasonTag.new, local: true, url: super_admin_season_tags_path, html: { multipart: true, class: "space-y-6", data: { turbo: false }}) do |f| %>
         <tr>
           <td class="px-4 py-2 border-b border-blue-200 text-center">追加用</td>
 
           <td class="px-4 py-2 border-b border-blue-200 text-center">
-            <%= f.text_field :name, class: "w-full border border-gray-100 rounded-md p-2 bg-white" %>
+            <%= f.text_field :season, class: "w-full border border-gray-100 rounded-md p-2 bg-white" %>
           </td>
 
           <td class="px-4 py-2 border-b border-blue-200 text-center">-</td>
@@ -39,22 +39,22 @@
 
       <% end %>
 
-      <% if @service_tags.present? %>
-          <% @service_tags.each do |service_tag| %>
+      <% if @season_tags.present? %>
+          <% @season_tags.each do |season_tag| %>
             <tr class="hover:bg-blue-50">
-              <td class="px-4 py-2 border-b border-blue-200"><%= service_tag.id %></td>
-              <td class="px-4 py-2 border-b border-blue-200"><%= service_tag.name %></td>
-              <td class="px-4 py-2 border-b border-blue-200"><%= service_tag.css_style.id %></td>
-              <td class="px-4 py-2 border-b border-blue-200"><%= service_tag.css_style.style_name %></td>
-              <td class="px-4 py-2 border-b border-blue-200"><%= service_tag.css_style.style_daisyui %></td>
+              <td class="px-4 py-2 border-b border-blue-200"><%= season_tag.id %></td>
+              <td class="px-4 py-2 border-b border-blue-200"><%= season_tag.season %></td>
+              <td class="px-4 py-2 border-b border-blue-200"><%= season_tag.css_style.id %></td>
+              <td class="px-4 py-2 border-b border-blue-200"><%= season_tag.css_style.style_name %></td>
+              <td class="px-4 py-2 border-b border-blue-200"><%= season_tag.css_style.style_daisyui %></td>
               <td class="px-4 py-2 border-b border-blue-200 text-center">
                 <div class="flex items-center justify-center space-x-2">
                   <%# 編集ボタン %>
-                  <%= link_to "編集", edit_super_admin_service_tag_path(service_tag),
+                  <%= link_to "編集", edit_super_admin_season_tag_path(season_tag),
                         class: "bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs" %>
 
                   <%# 削除ボタン %>
-                  <%= button_to "削除", super_admin_service_tag_path(service_tag),
+                  <%= button_to "削除", super_admin_season_tag_path(season_tag),
                         method: :delete,
                         data: { turbo: false, confirm: "本当に削除しますか？" },
                         class: "bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs" %>

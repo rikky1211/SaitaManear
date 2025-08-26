@@ -1,0 +1,2 @@
+module SuperAdmin::SeasonTagsHelper
+end
