@@ -4,7 +4,6 @@ class SuperAdmin::UsersController < SuperAdmin::BaseController
   end
 
   def show
-
   end
 
   def edit
@@ -19,19 +18,17 @@ class SuperAdmin::UsersController < SuperAdmin::BaseController
       flash.now[:error] = "失敗：ユーザ情報を修正できませんでした"
       render :edit, status: :unprocessable_entity
     end
-
   end
 
   def destroy
     user = User.find(params[:id])
     user.destroy!
     redirect_to super_admin_users_path, notice: "成功：ユーザ情報を削除しました"
-  end 
+  end
 
   private
-  
+
   def user_params
     params.require(:user).permit(:id, :name, :email, :role)
   end
-
 end

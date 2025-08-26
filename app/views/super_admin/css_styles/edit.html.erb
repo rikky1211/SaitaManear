@@ -1,0 +1,39 @@
+<h1 class="text-3xl text-bold">CSS_Style</h1>
+
+<%= form_with(model: @css_style, local: true, url: super_admin_css_style_path(@css_style), html: { multipart: true, class: "space-y-6" }, data: { turbo: false }) do |f| %>
+  <div>
+    <%= f.label :id, class: "block font-medium text-gray-700 font-bold mb-1" do %>
+      タブID : <%= @css_style.id %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= f.label :style_name, class: "block font-medium text-gray-700 font-bold mb-1" do %>
+      CSSスタイル名
+      <span class="text-red-400 text-sm font-bold ml-2"> *必須 （例/【ボタン】水色） </span>
+    <% end %>
+    <%= f.text_field :style_name, class: "w-full border border-gray-300 rounded-md p-2 bg-white" %>
+  </div>
+
+  <div>
+    <%= f.label :style_color, class: "block font-medium text-gray-700 font-bold mb-1" do %>
+      CSSスタイルの色を表すと・・・
+      <span class="text-red-400 text-sm font-bold ml-2"> *必須 （例/ 薄水色） </span>
+    <% end %>
+    <%= f.text_field :style_color, class: "w-full border border-gray-300 rounded-md p-2 bg-white" %>
+  </div>
+
+  <div>
+    <%= f.label :style_daisyui, class: "block font-medium text-gray-700 font-bold mb-1" do %>
+      DaisyUIのクラス
+      <span class="text-red-400 text-sm font-bold ml-2"> *必須 （例/ btn btn-warning） </span>
+    <% end %>
+    <%= f.text_field :style_daisyui, class: "w-full border border-gray-300 rounded-md p-2 bg-white" %>
+  </div>
+
+
+  <!-- 登録ボタン -->
+  <div>
+    <%= f.submit "登録", class: "bg-green-600 text-white font-semibold px-6 py-2 rounded-md hover:bg-green-700"%>
+  </div>
+<% end %>
