@@ -17,18 +17,6 @@
     <%= f.file_field :spot_image, class: "w-full bg-white" %>
   </div>
 
-  <!-- タグ選択 -->
-  <div>
-    <p class="font-medium text-gray-700 mb-2">タグ選択（未実装）</p>
-    <div class="flex gap-2 flex-wrap">
-      <% @season_tags.each do |tag| %>
-        <span class="<%= tag.css_style.style_daisyui %>">
-          <%= tag.season %>
-        </span>
-      <% end %>
-    </div>
-  </div>
-
   <!-- 概要 -->
   <div>
     <%= f.label :summary, "概要", class: "block font-medium text-gray-700 mb-1" %>

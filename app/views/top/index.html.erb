@@ -1,30 +1,34 @@
-  <!-- ✅ 背景付きの Welcome セクション -->
-  <div class="bg-spot-wrapper relative flex items-center justify-center z-0 bg-no-repeat bg-top bg-scroll bg-contain">
-    <div class="text-center">
-      <%= image_tag "top/welcome_saitamanear.png", alt: "welcome_saitamanear", class: "w-100 h-auto mx-auto" %>
-    </div>
+<!-- ロゴ？ -->
+<div class="logo bg-spot-wrapper relative flex items-center justify-center bg-no-repeat bg-top bg-scroll bg-contain">
+  <div class="text-center">
+    <%= image_tag "top/welcome_saitamanear.png", alt: "welcome_saitamanear", class: "w-100 h-auto mx-auto" %>
   </div>
+</div>
 
-  <!-- ✅ サービス説明 -->
-  <div class="pt-4 prose mx-auto max-w-2xl text-center">
-    <p class="py-5 text-xl font-semibold text-gray-800">
-      Saitama(埼玉) + Mania(マニア) + near(近く)
-    </p>
+<!-- サービス説明 -->
+<div class="service-info pt-4 prose mx-auto max-w-2xl text-center">
+  <p class="py-5 text-xl font-semibold text-gray-800">
+    Saitama(埼玉) + Mania(マニア) + near(近く)
+  </p>
 
-    <p class="py-4 text-lg text-gray-800 leading-relaxed">
-      「サイトにはあまり載っていない穴場」や「ちょっと変わったスポット」を発見！<br />
-      埼玉で“寄り道”を楽しむためのサービスです。
-    </p>
-  </div>
+  <p class="py-4 text-lg text-gray-800 leading-relaxed">
+    「サイトにはあまり載っていない穴場」や「ちょっと変わったスポット」を発見！<br />
+    埼玉で“寄り道”を楽しむためのサービスです。
+  </p>
+</div>
 
-  <div class="flex flex-col gap-2 pt-10 mx-auto w-80">
-    <%= link_to terms_of_use_path, class: "w-full py-2 px-4 rounded bg-yellow-400 hover:bg-orange-400 font-semibold text-center transition" do %>
-      利用規約
-    <% end %>
-    <%= link_to privacy_policy_path, class: "w-full py-2 px-4 rounded bg-yellow-400 hover:bg-orange-400 font-semibold text-center transition" do %>
-      プライバシーポリシー
-    <% end %>
-    <%= link_to contact_form_path, class: "w-full py-2 px-4 rounded bg-yellow-400 hover:bg-orange-400 font-semibold text-center transition" do %>
-      お問い合わせ
-    <% end %>
-  </div>
+<div class="how-to-use text-bold text-2xl text-blue-500 mx-auto text-center">
+  <%= link_to "≫ 使い方はこちら ≪", how_to_use %>
+</div>
+
+<div class="flex flex-col gap-2 pt-10 mx-auto w-80">
+  <%= link_to terms_of_use_path, class: "w-full py-2 px-4 rounded bg-yellow-400 hover:bg-orange-400 font-semibold text-center transition" do %>
+    利用規約
+  <% end %>
+  <%= link_to privacy_policy_path, class: "w-full py-2 px-4 rounded bg-yellow-400 hover:bg-orange-400 font-semibold text-center transition" do %>
+    プライバシーポリシー
+  <% end %>
+  <%= link_to contact_form_path, class: "w-full py-2 px-4 rounded bg-yellow-400 hover:bg-orange-400 font-semibold text-center transition" do %>
+    お問い合わせ
+  <% end %>
+</div>

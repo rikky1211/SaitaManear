@@ -15,7 +15,7 @@ class Spot < ApplicationRecord
   validates :spot_image,
               presence: true,
               content_type: ACCEPTED_CONTENT_TYPES,
-              size: { less_than_or_equal_to: 10.megabytes }
+              size: { less_than_or_equal_to: 100.megabytes }
 
   validate :latlng_uniq
   validate :must_be_in_saitama
@@ -25,7 +25,7 @@ class Spot < ApplicationRecord
   has_many :favorites, dependent: :destroy
 
   belongs_to :user
-  belongs_to :service_tag
+  belongs_to :service_tag, optional: true
   # belongs_to :town
 
   has_one_attached :spot_image
@@ -39,6 +39,11 @@ class Spot < ApplicationRecord
   end
 
   def must_be_in_saitama
+    if latitude.nil? || longitude.nil?
+      errors.add(:base, "GoogleMap上をクリックして、登録するスポット場所を指定してください")
+      return
+    end
+    
     results = Geocoder.search([ latitude, longitude ]).first.formatted_address
     # binding.pry
     Rails.logger.debug "-----------------------------------"
