@@ -12,6 +12,7 @@ module.exports = {
 
   // Tailwind v4以降は正規表現不可らしい。
   safelist: [
+    // btn
     "btn",
     "btn-error",
     "btn-primary",
@@ -20,6 +21,16 @@ module.exports = {
     "btn-info",
     "btn-success",
     "btn-accent",
+
+    "btn-circle",
+
+    // [p|m][x|y]
+    "w-2",
+    "w-3",
+    "w-4",
+    "h-2",
+    "h-3",
+    "h-4",
     { pattern: /(hover:)?bg-(?:red|blue|green|yellow|pink|lime)-(?:[1-9]00|50)/ },
     { pattern: /(?:p|m)(?:x|y)?-(?:[1-9]|1[1-9]|20)/},
     { pattern: /[wh]-(?:[0-9]|[1-9][0-9]|[1-9][0-9]?)/ },
