@@ -1,4 +1,4 @@
-<div class="flex flex-col items-center pt-10">
+<div class="flex flex-col items-center pt-10 px-4">
   <div class="card w-full max-w-sm bg-orange-200 shadow-xl">
     <div class="card-body">
       <h2 class="card-title justify-center">パスワード変更</h2>
@@ -12,7 +12,7 @@
         </div>
 
         <div class="form-control mb-4">
-          <%= f.label :password, "新しいパスワード（#{@minimum_password_length}文字以上 / 変更しない場合は空欄）", class: "label" %>
+          <%= f.label :password, "新しいパスワード（#{@minimum_password_length}文字以上）", class: "label" %>
           <%= f.password_field :password, autocomplete: "new-password", class: "input input-bordered" %>
         </div>
 

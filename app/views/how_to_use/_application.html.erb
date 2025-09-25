@@ -1,0 +1,16 @@
+<!-- filepath: app/views/how_to_use/_application.html.erb -->
+<input type="checkbox" id="my_modal_7" class="modal-toggle" />
+<div class="modal" role="dialog">
+  <div class="modal-box max-w-2xl">
+    <!-- 右上のバツボタン -->
+    <label for="my_modal_7" class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</label>
+    
+    <h3 class="flex flex-row text-lg font-bold mb-4">
+      <%= image_tag 'header/question.png', alt: "使い方", class: "w-6 h-6" %>
+      <a class="ml-2">使い方</a>
+    </h3>
+    
+    <%= render 'how_to_use/sort' %>
+  </div>
+  <label class="modal-backdrop" for="my_modal_7">Close</label>
+</div>

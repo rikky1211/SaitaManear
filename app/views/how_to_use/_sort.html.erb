@@ -1,0 +1,18 @@
+<%
+  # 現在のコントローラーとアクションを取得
+  current_controller = controller_name
+  current_action = action_name
+  
+  # 部分テンプレートのパスを決定
+  template_path = "how_to_use/#{current_controller}/#{current_action}"
+%>
+
+<div class="prose max-w-none">
+  <% if lookup_context.template_exists?(template_path, [], true) %>
+    <!-- 対応する説明テンプレートが存在する場合 -->
+    <%= render template_path %>
+  <% else %>
+    <!-- デフォルトの説明 -->
+    <%= render 'how_to_use/default' %>
+  <% end %>
+</div>
