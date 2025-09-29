@@ -1,0 +1,104 @@
+<h2 class="flex items-center justify-center text-2xl font-semibold border-4 border-orange-300 bg-orange-100 rounded-lg">
+  スポット新規登録
+</h2>
+
+<h2 class="flex items-center justify-center text-2xl font-semibold mt-4">
+  何ここ？面白い！！と思った場所を登録してみよう！
+</h2>
+
+<div class="py-2">
+  <%# ----------------------------------- %>
+  <div class="py-2">
+    <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
+      <div class="collapse-title font-semibold">
+        <p class="font-bold test-xl">
+          ・ スポット名称
+          <span class="text-red-400 text-sm font-bold ml-2">*必須</span>
+        </p>
+      </div>
+    
+      <div class="collapse-content text-sm">
+        <div class="ml-4">
+          その場所のスポットの名称を考えて入れてみよう！<br />
+            <div class="border rounded-lg m-4 p-2">
+            例：<br />
+            「目の錯覚で上り下りが怖い階段」<br />
+            「飲める湧き水」、「他ではあまり見ない信号・標識」など
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <%# ----------------------------------- %>
+  <div class="py-2">
+    <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
+      <div class="collapse-title font-semibold">
+        <p class="font-bold test-xl">
+          ・ 画像
+          <span class="text-red-400 text-sm font-bold ml-2">*必須</span>
+        </p>
+      </div>
+    
+      <div class="collapse-content text-sm">
+        <div class="ml-4">
+          「ファイルを選択」をクリックして<br />
+          スポットに使う写真を画像を選択してください。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# ----------------------------------- %>
+  <div class="py-2">
+    <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
+      <div class="collapse-title font-semibold">
+        <p class="font-bold test-xl">
+          ・ 概要
+        </p>
+      </div>
+    
+      <div class="collapse-content text-sm">
+        <div class="ml-4">
+          そのスポットの良かった点・珍しいと思った点などを入れてみよう！<br />
+            <div class="border rounded-lg m-4 p-2">
+            例：<br />
+            「こんなに上り下りが怖い階段を見たことがない」<br />
+            「夏は冷たい水が飲めて美味しい。冬も冷たい水が出るが、地下から汲んでいる水なので気持ち良い」など
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# ----------------------------------- %>
+  <div class="py-2">
+    <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
+      <div class="collapse-title font-semibold">
+        <p class="font-bold test-xl">
+        ・ 地図からスポット位置を選択
+          <span class="text-red-400 text-sm font-bold ml-2">*必須</span>
+        </p>
+      </div>
+    
+      <div class="collapse-content text-sm">
+        <div class="ml-4">
+          登録したいスポットがどこに合ったか、GoogleMapをクリックしてスポットを打とう！<br />
+          <div class="border rounded-lg">
+            <p class="pb-4">
+              GoogleMapをクリックすると<%= image_tag "spot_location.png", class: "inline mx-1" %>マークが付き<br />
+              投稿すると探索ページでその場所にスポットが登録されます！
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="py-2 text-right font-bold">
+    <P>スポット情報を記載したら投稿ボタンを押してみよう！！</P>  
+  </div>
+</div>
+
+
+<%= render "how_to_use/default_question" %>
