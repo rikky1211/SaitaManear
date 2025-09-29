@@ -1,0 +1,80 @@
+<h2 class="flex items-center justify-center text-2xl font-semibold border-4 border-orange-300 bg-orange-100 rounded-lg">
+  探索
+</h2>
+
+<h2 class="flex items-center justify-center text-2xl font-semibold mt-4">
+  埼玉にあるスポットを探してみよう！
+</h2>
+
+<div class="py-2">
+  <%# ----------------------------------- %>
+  <div class="py-2">
+    <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
+      <div class="collapse-title font-semibold">
+        <p class="font-bold test-xl">
+          ・ 現在地
+          <%= image_tag "current_location.png", class: "inline mx-1" %>
+        </p>
+      </div>
+    
+      <div class="collapse-content text-sm">
+        <div class="ml-4">
+          現在地に青いアイコンが表示されます！<br />
+          ※ 現在地を表示するには位置情報の使用を許可が必要です。
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <%# ----------------------------------- %>
+  <div class="py-2">
+    <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
+      <div class="collapse-title font-semibold">
+        <p class="font-bold test-xl">
+          ・ 登録されたスポット１<br />
+          <span class="ml-4"> 
+            <%= image_tag "spot_location.png", class: "inline mx-1" %>
+            をクリックしてみよう！
+          </span>
+        </p>
+      </div>
+    
+      <div class="collapse-content text-sm">
+        <div class="ml-4">
+          このマーカーがある所に登録されたスポットがあります！！<br />
+          試しに1つクリックしてみましょう。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# ----------------------------------- %>
+  <div class="py-2">
+    <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
+      <div class="collapse-title font-semibold">
+        <p class="font-bold test-xl">
+          ・ 登録されたスポット２<br />
+
+          <span class="ml-4">
+            スポットの 
+            <span class="font-bold text-blue-500 underline">
+              詳細はこちら
+            </span>
+            をクリックしてみよう！
+          </span>
+        </p>
+      </div>
+    
+      <div class="collapse-content text-sm">
+        <div class="ml-4 py-2">
+          <%= image_tag "how_to_use/spots/spot_balloon_summary.png", class: "mx-1" %>
+          スポットのクリックすると画像のように吹き出しが表示されます。<br />
+          気になったら「詳細はこちら」をクリックして、スポットの詳細を見てみましょう！
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render "how_to_use/default_question" %>
