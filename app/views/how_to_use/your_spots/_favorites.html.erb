@@ -1,0 +1,58 @@
+<h2 class="flex items-center justify-center text-2xl font-semibold border-4 border-orange-300 bg-orange-100 rounded-lg">
+  お気に入りスポット一覧
+</h2>
+
+<h2 class="flex items-center justify-center text-2xl font-semibold mt-4">
+  お気に入りのスポットを増やしていこう！
+</h2>
+
+<div class="py-2">
+  <%# ----------------------------------- %>
+  <div class="py-2">
+    <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
+      <div class="collapse-title font-semibold flex flex-row">
+        <p class="font-bold test-xl">
+          ・ お気に入りを増やす
+            <div class="w-8 h-8">
+              <%= image_tag "favorite/unfavorite.png", alt: "お気に入り解除ボタン" %>
+            </div>
+            <div class="w-6 h-6">
+              <%= image_tag "favorite/favorite.png", alt: "お気に入り登録ボタン" %>
+            </div>
+        </p>
+      </div>
+    
+      <div class="collapse-content text-sm">
+        <div class="ml-4">
+          スポットの詳細で上記ハートをクリックしに行けば登録可能です。<br />
+          このページでお気に入り解除も可能です。
+          <br />
+          <%= link_to "ランダムでスポットを探してみる！！", spot_path(@spot), class:"font-bold text-blue-500 underline" %><br />
+          ※ あなたが登録されたスポットでは表示されません。
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <%# ----------------------------------- %>
+  <div class="py-2">
+    <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
+      <div class="collapse-title font-semibold">
+        <p class="font-bold test-xl">
+          ・お気に入りスポットの詳細をみてみる
+        </p>
+      </div>
+    
+      <div class="collapse-content text-sm">
+        <div class="ml-4 py-2">
+          <%= image_tag "how_to_use/your_spots/favorites_spot.png", class: "mx-1 pb-2" %>
+          スポット詳細へをクリックすると、スポットに移動します。<br />
+          ※ タグ、近くのスポットなどの情報を追加更新予定です。
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render "how_to_use/default_question" %>

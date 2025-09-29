@@ -1,0 +1,35 @@
+<h2 class="flex items-center justify-center text-2xl font-semibold border-4 border-orange-300 bg-orange-100 rounded-lg">
+  登録したスポット一覧
+</h2>
+
+<h2 class="flex items-center justify-center text-2xl font-semibold mt-4">
+  登録したスポットをここで管理！
+</h2>
+
+<div class="py-2">
+
+  
+  <%# ----------------------------------- %>
+  <div class="py-2">
+    <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
+      <div class="collapse-title font-semibold">
+        <p class="font-bold test-xl">
+          ・登録したスポットを編集/削除したい
+        </p>
+      </div>
+    
+      <div class="collapse-content text-sm">
+        <div class="ml-4 py-2">
+          各スポットの右側にある編集ボタン、削除ボタンで可能です。<br />
+          ※ 削除した場合、復元は不可となります。ご注意ください。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%# ----------------------------------- %>
+  <%= render "how_to_use/shared/info_new_spots" %>
+</div>
+
+
+<%= render "how_to_use/default_question" %>
