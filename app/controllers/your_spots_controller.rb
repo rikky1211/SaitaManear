@@ -34,6 +34,9 @@ class YourSpotsController < ApplicationController
 
   def favorites
     @spots = current_user.favorite_to_spots.page(params[:page])
+
+    # 使い方用スポットを1つだけ抽出
+    @spot = Spot.order("RANDOM()").first
   end
 
 private
