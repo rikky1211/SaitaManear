@@ -1,9 +1,9 @@
 <h2 class="flex items-center justify-center text-2xl font-semibold border-4 border-orange-300 bg-orange-100 rounded-lg">
-  探索
+  周辺探索
 </h2>
 
 <h2 class="flex items-center justify-center text-2xl font-semibold mt-4">
-  埼玉にあるスポットを探してみよう！
+  現在地から近いスポットを探してみよう！
 </h2>
 
 <div class="py-2">
@@ -31,18 +31,16 @@
     <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
       <div class="collapse-title font-semibold">
         <p class="font-bold test-xl">
-          ・ 登録されたスポット１<br />
-          <span class="ml-4"> 
-            <%= image_tag "spot_location.png", class: "inline mx-1" %>
-            をクリックしてみよう！
-          </span>
+          ・ 登録されたスポット
+          <%= image_tag "spot_location.png", class: "inline mx-1" %>
+        </p>
         </p>
       </div>
     
       <div class="collapse-content text-sm">
         <div class="ml-4">
-          このマーカーがある所に登録されたスポットがあります！！<br />
-          試しに1つクリックしてみましょう。
+          登録されたスポットの場所が表示されます。<br />
+          ※ 探索と異なり、吹き出しは表示されません
         </div>
       </div>
     </div>
@@ -53,12 +51,11 @@
     <div tabindex="0" class="collapse collapse-arrow bg-base-100 border-2">
       <div class="collapse-title font-semibold">
         <p class="font-bold test-xl">
-          ・ 登録されたスポット２<br />
+          ・ 近くスポット一覧から<br />
 
           <span class="ml-4">
-            スポットの 
             <span class="font-bold text-blue-500 underline">
-              詳細はこちら
+              スポット詳細へ
             </span>
             をクリックしてみよう！
           </span>
@@ -67,9 +64,9 @@
     
       <div class="collapse-content text-sm">
         <div class="ml-4 py-2">
-          <%= image_tag "how_to_use/spots/index_spot_balloon_summary.png", class: "mx-1" %>
-          スポットのクリックすると画像のように吹き出しが表示されます。<br />
-          気になったら「詳細はこちら」をクリックして、スポットの詳細を見てみましょう！
+          <%= image_tag "how_to_use/spots/search_near_spot.png", class: "mx-1 pb-2" %>
+          近くにあるスポットが5つ表示されます！<br />
+          画像を気になったら「スポット詳細へ」をクリックして、詳細を見てみましょう！
         </div>
       </div>
     </div>
