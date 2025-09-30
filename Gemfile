@@ -104,6 +104,9 @@ group :development, :test do
 
   # RSpec用Gem
   gem 'rspec-rails'
+
+  # RSpecのテスト用のダミーデータを簡単に作成できるgem
+  gem 'factory_bot_rails'
 end
 
 group :development do
