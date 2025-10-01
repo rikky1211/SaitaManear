@@ -16,15 +16,16 @@ module Myapp
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
-    # Configuration for the application, engines, and railties goes here.
-    #
-    # These settings can be overridden in specific environments using the files
-    # in config/environments, which are processed later.
-    #
-    # config.time_zone = "Central Time (US & Canada)"
-    # config.eager_load_paths << Rails.root.join("extras")
-
     # 追加(valiant作成時の処理で使うvariantプロセッサの設定をvipsにする)
     config.active_storage.variant_processor = :vips
+
+    # 追加_[g model モデル名]を売ったときに
+    config.generators do |g|
+      g.test_framework :rspec   # RSpec/テスト用ファイルを作成
+      g.fixture_replacement :factory_bot, dir: "spec/factories" # RSpec/factory_bot用ファイルを作成
+    end
+
+    # Rails 8.1 から to_time の挙動がタイムゾーン情報を保持するように変わる
+    config.active_support.to_time_preserves_timezone = :zone
   end
 end
