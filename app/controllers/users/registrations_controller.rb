@@ -5,7 +5,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:show, :update]
 
   def build_resource(hash = {})
     hash[:uid] = User.create_unique_string
@@ -13,11 +13,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def show
+    unless user_signed_in?
+      redirect_to new_user_session_path
+      return
+    end
     @user = current_user
     @user_masked_email = current_user.email.sub(/^(.{3}).*(@.*)$/, '\1*****\2')
   end
 
   def update
+    # current_userの存在確認を追加
+    unless user_signed_in?
+      redirect_to new_user_session_path
+      return
+    end
+
     self.resource = current_user
 
     # 2. 更新処理を実行
