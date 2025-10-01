@@ -107,6 +107,9 @@ group :development, :test do
 
   # RSpecのテスト用のダミーデータを簡単に作成できるgem
   gem 'factory_bot_rails'
+
+  # RSpecの異なるダミーデータ作成用Gem
+  gem "faker"
 end
 
 group :development do
