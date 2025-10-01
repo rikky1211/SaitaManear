@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Spots", type: :request do
+RSpec.describe "Your_Spots", type: :request do
   include Devise::Test::IntegrationHelpers
 
   # 埼玉県内の有効な座標を使用（各スポットに異なる座標）

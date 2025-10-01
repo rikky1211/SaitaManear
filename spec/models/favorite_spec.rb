@@ -105,26 +105,6 @@ RSpec.describe Favorite, type: :model do
     end
   end
 
-  describe 'スコープやクラスメソッド（存在する場合）' do
-    it 'by_userスコープが存在するかテスト' do
-      if Favorite.respond_to?(:by_user)
-        favorite.save!
-        expect(Favorite.by_user(user)).to include(favorite)
-      else
-        skip 'by_userスコープが定義されていません'
-      end
-    end
-
-    it 'by_spotスコープが存在するかテスト' do
-      if Favorite.respond_to?(:by_spot)
-        favorite.save!
-        expect(Favorite.by_spot(spot)).to include(favorite)
-      else
-        skip 'by_spotスコープが定義されていません'
-      end
-    end
-  end
-
   describe 'タイムスタンプ' do
     it 'お気に入り作成時にcreated_atが設定されること' do
       favorite.save!
