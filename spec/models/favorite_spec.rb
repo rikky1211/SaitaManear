@@ -59,7 +59,7 @@ RSpec.describe Favorite, type: :model do
     end
   end
 
-  describe 'アソシエーション' do
+  describe 'アソシエーション(モデル間の関連付け)' do
     it 'userに属すること' do
       association = Favorite.reflect_on_association(:user)
       expect(association.macro).to eq(:belongs_to)

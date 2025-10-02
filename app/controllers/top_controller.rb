@@ -8,9 +8,6 @@ class TopController < ApplicationController
                        .first
   end
 
-  def how_to_use
-  end
-
   def terms_of_use
   end
 
