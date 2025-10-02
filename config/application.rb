@@ -27,5 +27,8 @@ module Myapp
 
     # Rails 8.1 から to_time の挙動がタイムゾーン情報を保持するように変わる
     config.active_support.to_time_preserves_timezone = :zone
+
+    # rails-i18n
+    config.i18n.default_locale = :ja
   end
 end
