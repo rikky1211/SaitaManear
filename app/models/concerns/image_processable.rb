@@ -4,7 +4,6 @@ module ImageProcessable
 
   # 画像処理メソッド。image_ioにはparams[:post][:image]の中の一時ファイルを渡す
   # widthには横幅の最大値を渡す
-  # classが
   def self.process_and_transform_image(image_io, width)
     return unless image_io.present?
 
