@@ -19,6 +19,7 @@ class YourProfilesController < ApplicationController
       judge = @user.update(your_profile_params.except(:password, :password_confirmation, :current_password))
     end
 
+    # judgeにはtrue.falseが入ってる
     if judge
       redirect_to user_profile_path, notice: "プロフィールを更新しました"
     else
