@@ -101,7 +101,7 @@ URLは[こちら](https://www.figma.com/design/qiYauRcFg0Ew4gOpA4y6Ql/%E7%84%A1%
 
 
 ## ER図
-[![Image from Gyazo](https://i.gyazo.com/a2c91e2062c8a8e75466d80e9690398f.png)](https://gyazo.com/a2c91e2062c8a8e75466d80e9690398f)
+[![Image from Gyazo](https://i.gyazo.com/f51a00edb2fa1788d3cac148c5018800.png)](https://gyazo.com/f51a00edb2fa1788d3cac148c5018800)
 
 ### 本リリースまでに作っていたいもの
 #### 全ユーザー
