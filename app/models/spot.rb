@@ -43,12 +43,8 @@ class Spot < ApplicationRecord
       errors.add(:base, "GoogleMap上をクリックして、登録するスポット場所を指定してください")
       return
     end
-    
+
     results = Geocoder.search([ latitude, longitude ]).first.formatted_address
-    # binding.pry
-    Rails.logger.debug "-----------------------------------"
-    Rails.logger.debug "Geocoder results: #{results}"
-    Rails.logger.debug "-----------------------------------"
 
     unless results.include?("埼玉県")
       errors.add(:base, "埼玉県以外の場所は登録できません。")

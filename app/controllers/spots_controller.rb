@@ -33,7 +33,6 @@ class SpotsController < ApplicationController
         render :new, status: :unprocessable_entity
       end
     else
-      logger.debug @spot.errors.full_messages
       flash.now[:error] = "新規スポット登録に失敗しました"
       render :new, status: :unprocessable_entity
     end
