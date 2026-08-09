@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
   helper_method :form_url
-
+ 
   def form_url
     if controller_path == "your_spots"
       your_spot_path(@spot)

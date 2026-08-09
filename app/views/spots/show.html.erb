@@ -31,23 +31,14 @@
           <td><%= @spot.summary %></td>
         </tr>
 
-      <div class="map-container" id="map"></div>
+      <div class="map-container">
+        <%= render 'shared/google_map', callback_name: 'ShowMarker' %>
+      </div>
 
       <!-- 近くのスポット(未実装) -->
       </div>
     </div>
   </div>
-
-<style>
-  #map {
-    height: 50vh;
-  }
-</style>
-
-<!-- Google Maps JS読み込み -->
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=ShowMarker&language=ja">
-</script>
 
 <script>
   window.ShowMarker = function() {
