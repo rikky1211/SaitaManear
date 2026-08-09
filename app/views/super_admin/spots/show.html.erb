@@ -4,7 +4,7 @@
   <div class="spot-card bg-orange-200 rounded-lg border border-orange-700 p-4 space-y-6 max-w-5xl mx-auto">
     <div class="flex flex-row justify-between px-8">
       <h2 class="spot-title font-bold text-3xl mx-3 pt-2"><%= @spot.name %></h2>
-      <%= link_to '編集', edit_super_admin_spot_path(@spot), 
+      <%= link_to '編集', edit_super_admin_spot_path(@spot),
         class: "bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded text-bold" %>
     </div>
 
@@ -29,7 +29,9 @@
       </tr>
     </table>
 
-    <div class="map-container" id="map"></div>
+    <div class="map-container">
+      <%= render 'shared/google_map', callback_name: 'ShowMarker' %>
+    </div>
 
     <div class="near-spots-title">近くのスポット(Coming Soon...)</div>
     <div class="near-spots-place">
@@ -37,17 +39,6 @@
     </div>
   </div>
 </div>
-
-<style>
-  #map {
-    height: 50vh;
-  }
-</style>
-
-<!-- Google Maps JS読み込み -->
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=ShowMarker&language=ja">
-</script>
 
 <script>
   window.ShowMarker = function() {

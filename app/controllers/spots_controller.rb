@@ -2,7 +2,7 @@ class SpotsController < ApplicationController
   before_action :authenticate_user!, only: %i[new create]
 
   def index
-    @spots = Spot.all
+    @spots = Spot.all.page(params[:page])
     @lat = params[:lat]
     @lng = params[:lng]
   end

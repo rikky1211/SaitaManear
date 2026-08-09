@@ -1,4 +1,4 @@
-<div id="map"></div>
+<%= render 'shared/google_map', callback_name: 'SearchMarker', map_style: "position: absolute; top: 64px; bottom: 80px; width: 100%;" %>
 
 <script>
   function SearchMarker() {
@@ -84,16 +84,3 @@
     };
   }
 </script>
-
-<script async defer
-  src="https://maps.googleapis.com/maps/api/js?key=<%= ENV["GOOGLE_MAPS_API_KEY"] %>&callback=SearchMarker&language=ja">
-</script>
-
-<style>
-  #map {
-    position: absolute;
-    top: 64px;
-    bottom: 80px;
-    width: 100%;
-  }
-</style>

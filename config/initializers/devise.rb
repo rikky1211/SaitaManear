@@ -315,11 +315,16 @@ Devise.setup do |config|
 
   # [config.omniauth]: gem deviseにOmniAuthの設定を追加し、外部の認証プロパイダと連携Google認証
   # [:google_oauth2]: OmniAuthでGoogleのOAuth2プロバイダを指定する設定。Googleアカウントを使ったOAuth2認証が可能になる。
-  config.omniauth :google_oauth2,
-  ENV["GOOGLE_CLIENT_ID"],
-  ENV["GOOGLE_CLIENT_SECRET"],
-  {
-    scope: "email,profile",
-    redirect_uri: "#{ENV['HOST']}/users/auth/google_oauth2/callback"
+  omniauth_options = {
+    scope: "email,profile"
   }
+
+  if Rails.env.production?
+    omniauth_options[:redirect_uri] = "#{ENV['HOST']}/users/auth/google_oauth2/callback"
+  end
+
+  config.omniauth :google_oauth2,
+    ENV["GOOGLE_CLIENT_ID"],
+    ENV["GOOGLE_CLIENT_SECRET"],
+    omniauth_options
 end
